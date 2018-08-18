@@ -13,9 +13,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var workoutStore = WorkoutStore()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        print(#function)
+
+//        let navigationController = window!.rootViewController as! UINavigationController
+//        let itemsController = navigationController.topViewController as! ItemsViewController
+//        itemsController.itemStore = itemStore
+//        itemsController.imageStore = imageStore
+        
+        let tabController = window!.rootViewController as! UITabBarController
+        let navigationController = tabController.childViewControllers[0] as! UINavigationController
+        let workoutsController = navigationController.topViewController as! WorkoutsViewController
+        workoutsController.workoutStore = workoutStore
+        
         return true
     }
 
