@@ -10,11 +10,23 @@ import UIKit
 
 class Workout: NSObject {
     
-    var name: String
+    var name: String = ""
     let dateCreated: Date
+    var exercises = [Exercise]()
     
-    init(name: String) {
-        self.name = name
+    override init() {
         self.dateCreated = Date()
     }
+    
+//    func setExercises(exercises: [Exercise]) {
+//        clearExercises()
+//
+//        for exercise in exercises {
+//            self.exercises.append(exercise)
+//        }
+//    }
+//
+//    func clearExercises() {
+//        self.exercises = []
+//    }
 }

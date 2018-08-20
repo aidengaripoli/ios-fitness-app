@@ -14,7 +14,7 @@
         <!--New Workout-->
         <scene sceneID="YCy-ic-5Z0">
             <objects>
-                <viewController title="New Workout" id="4fl-hN-UbC" customClass="AddWorkoutController" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="New Workout" id="4fl-hN-UbC" customClass="AddWorkoutViewController" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aAI-Va-pqh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -31,7 +31,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ePb-67-cID">
                                         <rect key="frame" x="0.0" y="38" width="398" height="20.333333333333329"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60c-j6-gyl">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60c-j6-gyl">
                                                 <rect key="frame" x="0.0" y="0.0" width="348.33333333333331" height="20.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -49,12 +49,21 @@
                                         <rect key="frame" x="0.0" y="66.333333333333314" width="398" height="540.66666666666674"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="LmU-YR-Gt4">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExerciseCell" textLabel="BKg-5p-p48" style="IBUITableViewCellStyleDefault" id="LmU-YR-Gt4">
                                                 <rect key="frame" x="0.0" y="28" width="398" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LmU-YR-Gt4" id="61q-3I-Gry">
                                                     <rect key="frame" x="0.0" y="0.0" width="398" height="43.666666666666664"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BKg-5p-p48">
+                                                            <rect key="frame" x="20" y="0.0" width="358" height="43.666666666666664"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                         </prototypes>
@@ -67,9 +76,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="E9i-U6-oNN"/>
                                 </constraints>
-                                <state key="normal" title="ADD EXERCISE"/>
+                                <state key="normal" title="SELECT EXERCISES"/>
                                 <connections>
-                                    <segue destination="FmB-BR-dwr" kind="show" id="NDp-rx-6Ni"/>
+                                    <segue destination="FmB-BR-dwr" kind="show" identifier="showExercises" id="NDp-rx-6Ni"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -85,15 +94,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XGh-l7-LpY"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="rg6-Kp-WVB" id="Ccw-1j-HP6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fnS-0F-gIr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3477" y="-294"/>
         </scene>
-        <!--Add Exercise-->
+        <!--Select Exercises-->
         <scene sceneID="fRg-Cb-J1V">
             <objects>
-                <viewController title="Add Exercise" id="FmB-BR-dwr" customClass="AddExerciseController" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Select Exercises" id="FmB-BR-dwr" customClass="AddExerciseViewController" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Ny-r9-92Z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -206,7 +218,7 @@
         <!--Workout Exercises-->
         <scene sceneID="8Ua-YN-F95">
             <objects>
-                <tableViewController title="Workout Exercises" id="fmm-5S-lZz" sceneMemberID="viewController">
+                <tableViewController title="Workout Exercises" id="fmm-5S-lZz" customClass="WorkoutExercisesViewController" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="bI0-7y-YUT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

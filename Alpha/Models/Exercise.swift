@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Exercise {
+class Exercise: NSObject {
     
     let name: String
     

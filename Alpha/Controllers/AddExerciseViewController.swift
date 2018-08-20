@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddExerciseController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Outlets
     
@@ -16,16 +16,25 @@ class AddExerciseController: UIViewController, UITableViewDelegate, UITableViewD
     
     // MARK: - Properties
     
-    var exercises = [Exercise]()
+    var workout: Workout!
+    
+//    var workoutStore: WorkoutStore // not sure if needed yet
+    
+//    var exercises = [Exercise]()
+    var exerciseStore: ExerciseStore! // replace with a store
     
     var filteredExercises = [Exercise]()
     
     let searchController = UISearchController(searchResultsController: nil)
     
+    var selectedIndexPaths = [IndexPath]()
+    
     // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("AddExerciseViewController - \(#function)")
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -37,17 +46,10 @@ class AddExerciseController: UIViewController, UITableViewDelegate, UITableViewD
         searchController.searchBar.scopeButtonTitles = ["All", "Chest", "Shoulders", "Lats", "Biceps"]
         searchController.searchBar.delegate = self
         
-        // temporary data. will come from REST API
-        exercises = [
-            Exercise(name: "Bench Press", muscles: [.chest, .shoulders]),
-            Exercise(name: "Pull Up", muscles: [.lats, .biceps]),
-            Exercise(name: "Dip", muscles: [.chest, .triceps, .shoulders]),
-            Exercise(name: "Push Up", muscles: [.chest, .shoulders, .triceps]),
-            Exercise(name: "Bodyweight Row", muscles: [.lats])
-        ]
-        
         exercisesTableView.dataSource = self
         exercisesTableView.delegate = self
+        
+        updateSelectedExercises()
     }
     
     // MARK: - Tableview
@@ -57,7 +59,7 @@ class AddExerciseController: UIViewController, UITableViewDelegate, UITableViewD
             return filteredExercises.count
         }
         
-        return exercises.count
+        return exerciseStore.exercises.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,7 +70,7 @@ class AddExerciseController: UIViewController, UITableViewDelegate, UITableViewD
         if isFiltering() {
             exercise = filteredExercises[indexPath.row]
         } else {
-            exercise = exercises[indexPath.row]
+            exercise = exerciseStore.exercises[indexPath.row]
         }
         
         cell.textLabel?.text = exercise.name
@@ -76,14 +78,65 @@ class AddExerciseController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let exercise: Exercise
+        
+        if isFiltering() {
+            exercise = filteredExercises[indexPath.row]
+        } else {
+            exercise = exerciseStore.exercises[indexPath.row]
+        }
+        
+        if let index = selectedIndexPaths.index(of: indexPath) {
+            selectedIndexPaths.remove(at: index)
+            if let exerciseIndex = workout.exercises.index(of: exercise) {
+                workout.exercises.remove(at: exerciseIndex)
+            }
+        } else {
+            selectedIndexPaths.append(indexPath)
+            workout.exercises.append(exercise)
+        }
+        
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if selectedIndexPaths.index(of: indexPath) != nil {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
+    }
+    
     // MARK: - Private Instance Methods
+    
+    func updateSelectedExercises() {
+        selectedIndexPaths.removeAll()
+        
+        var exercises: [Exercise]
+        
+        if isFiltering() {
+            exercises = filteredExercises
+        } else {
+            exercises = exerciseStore.exercises
+        }
+        
+        for exercise in workout.exercises {
+            if let index = exercises.index(of: exercise) {
+                let indexPath = IndexPath(row: index, section: 0)
+                selectedIndexPaths.append(indexPath)
+            }
+        }
+        
+        exercisesTableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+    }
     
     func searchBarIsEmpty() -> Bool {
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredExercises = exercises.filter({ (exercise) -> Bool in
+        filteredExercises = exerciseStore.exercises.filter({ (exercise) -> Bool in
             var doesMuscleMatch = scope == "All"
             
             for muscle in exercise.muscles {
@@ -112,7 +165,7 @@ class AddExerciseController: UIViewController, UITableViewDelegate, UITableViewD
 
 // MARK: - Extensions
 
-extension AddExerciseController: UISearchResultsUpdating {
+extension AddExerciseViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
@@ -123,10 +176,11 @@ extension AddExerciseController: UISearchResultsUpdating {
     
 }
 
-extension AddExerciseController: UISearchBarDelegate {
+extension AddExerciseViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+        updateSelectedExercises()
     }
     
 }

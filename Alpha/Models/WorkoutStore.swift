@@ -13,7 +13,7 @@ class WorkoutStore {
     var workouts = [Workout]()
     
     @discardableResult func createWorkout() -> Workout {
-        let newWorkout = Workout(name: "Workout")
+        let newWorkout = Workout()
         
         workouts.append(newWorkout)
         
