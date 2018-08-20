@@ -63,7 +63,7 @@ class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath) as! ExerciseCell
         
         let exercise: Exercise
         
@@ -73,7 +73,19 @@ class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableV
             exercise = exerciseStore.exercises[indexPath.row]
         }
         
-        cell.textLabel?.text = exercise.name
+        var musclesString = ""
+        
+        for (index, muscle) in exercise.muscles.enumerated() {
+            musclesString.append(muscle.rawValue.capitalized)
+            
+            if index != exercise.muscles.count - 1 {
+                musclesString.append(", ")
+            }
+        }
+        
+//        cell.textLabel?.text = exercise.name
+        cell.nameLabel.text = exercise.name
+        cell.musclesLabel.text = musclesString
         
         return cell
     }
@@ -180,6 +192,14 @@ extension AddExerciseViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+        updateSelectedExercises()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.selectedScopeButtonIndex = 0
+        searchBar.text = ""
+        
         updateSelectedExercises()
     }
     

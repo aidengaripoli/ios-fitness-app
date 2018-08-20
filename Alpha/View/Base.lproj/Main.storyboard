@@ -114,22 +114,40 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExerciseCell" textLabel="oh7-aU-B3a" style="IBUITableViewCellStyleDefault" id="bhf-0n-sBK">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExerciseCell" rowHeight="68" id="bhf-0n-sBK" customClass="ExerciseCell" customModule="Alpha" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bhf-0n-sBK" id="QCr-Of-3vy">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="67.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oh7-aU-B3a">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.666666666666664"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exercise Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3zV-lF-g7d">
+                                                    <rect key="frame" x="20" y="11" width="114" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Muscles, Targeted" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkG-hq-plN">
+                                                    <rect key="frame" x="20.000000000000007" y="36" width="118.66666666666669" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.63236722797927469" green="0.63236722797927469" blue="0.63236722797927469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="highlightedColor" red="0.79197700777202074" green="0.79197700777202074" blue="0.79197700777202074" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ZkG-hq-plN" secondAttribute="bottom" id="A6G-vZ-6sn"/>
+                                                <constraint firstItem="ZkG-hq-plN" firstAttribute="top" secondItem="3zV-lF-g7d" secondAttribute="bottom" constant="4" id="D21-fD-at2"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZkG-hq-plN" secondAttribute="trailingMargin" id="Dbe-Nr-pjs"/>
+                                                <constraint firstItem="3zV-lF-g7d" firstAttribute="leading" secondItem="QCr-Of-3vy" secondAttribute="leadingMargin" id="KJU-xa-66b"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3zV-lF-g7d" secondAttribute="trailingMargin" id="YAt-we-Mx7"/>
+                                                <constraint firstItem="ZkG-hq-plN" firstAttribute="leading" secondItem="QCr-Of-3vy" secondAttribute="leadingMargin" id="ptK-8y-8H4"/>
+                                                <constraint firstItem="3zV-lF-g7d" firstAttribute="top" secondItem="QCr-Of-3vy" secondAttribute="topMargin" id="xwv-Ex-fWf"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="musclesLabel" destination="ZkG-hq-plN" id="VnU-JJ-SzY"/>
+                                            <outlet property="nameLabel" destination="3zV-lF-g7d" id="vQ3-in-XHg"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -149,7 +167,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PHd-Mb-elK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4322" y="-294"/>
+            <point key="canvasLocation" x="4321.739130434783" y="-294.29347826086956"/>
         </scene>
         <!--Workouts-->
         <scene sceneID="6Ak-0v-Efw">

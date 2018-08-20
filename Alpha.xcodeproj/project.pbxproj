@@ -12,6 +12,7 @@
 		8F2AE6F3212835FC0066C8E4 /* AddWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2AE6F2212835FC0066C8E4 /* AddWorkoutViewController.swift */; };
 		8F2AE6F721283B8D0066C8E4 /* Muscle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2AE6F621283B8D0066C8E4 /* Muscle.swift */; };
 		8F5609692129770600905908 /* ExerciseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5609682129770600905908 /* ExerciseStore.swift */; };
+		8F56096B212A946000905908 /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F56096A212A946000905908 /* ExerciseCell.swift */; };
 		8F571821212420CC001DA827 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F571820212420CC001DA827 /* TabBarController.swift */; };
 		8FD1F55821251064000E6852 /* WorkoutExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD1F55721251064000E6852 /* WorkoutExercisesViewController.swift */; };
 		8FE8EA1D21219B3500BA6258 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE8EA1C21219B3500BA6258 /* AppDelegate.swift */; };
@@ -49,6 +50,7 @@
 		8F2AE6F2212835FC0066C8E4 /* AddWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutViewController.swift; sourceTree = "<group>"; };
 		8F2AE6F621283B8D0066C8E4 /* Muscle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Muscle.swift; sourceTree = "<group>"; };
 		8F5609682129770600905908 /* ExerciseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseStore.swift; sourceTree = "<group>"; };
+		8F56096A212A946000905908 /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
 		8F571820212420CC001DA827 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8FD1F55721251064000E6852 /* WorkoutExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExercisesViewController.swift; sourceTree = "<group>"; };
 		8FE8EA1921219B3500BA6258 /* Alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alpha.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +177,7 @@
 				8F2AE6F2212835FC0066C8E4 /* AddWorkoutViewController.swift */,
 				8F2AE6F0212835310066C8E4 /* AddExerciseViewController.swift */,
 				8FD1F55721251064000E6852 /* WorkoutExercisesViewController.swift */,
+				8F56096A212A946000905908 /* ExerciseCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				8FE8EA502121A3C600BA6258 /* WorkoutCell.swift in Sources */,
 				8F2AE6F3212835FC0066C8E4 /* AddWorkoutViewController.swift in Sources */,
 				8F2AE6EF21282DC50066C8E4 /* Exercise.swift in Sources */,
+				8F56096B212A946000905908 /* ExerciseCell.swift in Sources */,
 				8FE8EA1D21219B3500BA6258 /* AppDelegate.swift in Sources */,
 				8F2AE6F1212835310066C8E4 /* AddExerciseViewController.swift in Sources */,
 				8FE8EA542124126500BA6258 /* WorkoutStore.swift in Sources */,
