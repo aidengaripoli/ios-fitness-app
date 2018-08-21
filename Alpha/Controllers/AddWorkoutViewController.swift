@@ -56,6 +56,10 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
     // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
@@ -104,6 +108,13 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.textLabel?.text = exercise.name
         
         return cell
+    }
+    
+    // MARK: - Private Instance Methods
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
 }

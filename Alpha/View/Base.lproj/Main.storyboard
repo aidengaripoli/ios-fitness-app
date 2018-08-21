@@ -69,6 +69,10 @@
                                         </prototypes>
                                     </tableView>
                                 </subviews>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="i7F-ui-2Wj" appends="YES" id="jh5-se-KMl"/>
+                                </connections>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4z-fg-M87">
                                 <rect key="frame" x="0.0" y="642" width="414" height="50"/>
@@ -115,6 +119,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fnS-0F-gIr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="i7F-ui-2Wj">
+                    <connections>
+                        <action selector="backgroundTapped:" destination="4fl-hN-UbC" id="2Hv-gY-fsi"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4384.057971014493" y="-294.29347826086956"/>
         </scene>
