@@ -78,7 +78,7 @@
                                 </constraints>
                                 <state key="normal" title="SELECT EXERCISES"/>
                                 <connections>
-                                    <segue destination="FmB-BR-dwr" kind="show" identifier="showExercises" id="NDp-rx-6Ni"/>
+                                    <segue destination="FmB-BR-dwr" kind="show" identifier="selectExercises" id="NDp-rx-6Ni"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -227,7 +227,7 @@
                                 <connections>
                                     <outlet property="dateLabel" destination="xIA-OU-FkF" id="3tP-5b-fZi"/>
                                     <outlet property="nameLabel" destination="mG9-nQ-1LZ" id="C8s-We-hJk"/>
-                                    <segue destination="fmm-5S-lZz" kind="show" id="8kD-wN-YRc"/>
+                                    <segue destination="fmm-5S-lZz" kind="show" identifier="showExercises" id="8kD-wN-YRc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -288,10 +288,10 @@
             </objects>
             <point key="canvasLocation" x="3477" y="437"/>
         </scene>
-        <!--View Controller-->
+        <!--Exercise Detail-->
         <scene sceneID="9Cb-Kp-fc5">
             <objects>
-                <viewController id="8mV-SQ-1D3" sceneMemberID="viewController">
+                <viewController title="Exercise Detail" id="8mV-SQ-1D3" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fcm-54-fxd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -301,7 +301,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lxi-Ow-zsP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4323" y="437"/>
+            <point key="canvasLocation" x="4384" y="437"/>
         </scene>
         <!--Profile-->
         <scene sceneID="sPW-dj-QJ4">

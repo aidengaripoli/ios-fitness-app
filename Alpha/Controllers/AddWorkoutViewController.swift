@@ -81,7 +81,7 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case "showExercises":
+        case "selectExercises":
             let addExerciseViewController = segue.destination as! AddExerciseViewController
             addExerciseViewController.workout = newWorkout
             addExerciseViewController.exerciseStore = exerciseStore

@@ -63,12 +63,19 @@ class WorkoutsViewController: UITableViewController {
             let navigationController = segue.destination as! UINavigationController
             let addWorkoutViewController = navigationController.viewControllers.first as! AddWorkoutViewController
             addWorkoutViewController.workoutStore = workoutStore
+        case "showExercises":
+            if let row = tableView.indexPathForSelectedRow?.row {
+                let workout = workoutStore.workouts[row]
+                
+                let workoutExercisesViewController = segue.destination as! WorkoutExercisesViewController
+                workoutExercisesViewController.workout = workout
+            }
         default:
             preconditionFailure("Unexpected segue identifier.")
         }
     }
     
-    // MARK: - UITableViewDataSource Methods
+    // MARK: - TableView Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return workoutStore.workouts.count
@@ -83,6 +90,33 @@ class WorkoutsViewController: UITableViewController {
         cell.dateLabel.text = dateFormatter.string(from: workout.dateCreated)
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let workout = workoutStore.workouts[indexPath.row]
+            
+            let title = "Delete \(workout.name)?"
+            let message = "Are you sure you want to delete this workout?"
+            
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+                self.workoutStore.removeWorkout(workout)
+                
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            alertController.addAction(deleteAction)
+            
+            present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        workoutStore.moveWorkout(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
 }

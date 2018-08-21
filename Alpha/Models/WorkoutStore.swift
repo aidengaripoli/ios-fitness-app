@@ -20,4 +20,22 @@ class WorkoutStore {
         return newWorkout
     }
     
+    func removeWorkout(_ workout: Workout) {
+        if let index = workouts.index(of: workout) {
+            workouts.remove(at: index)
+        }
+    }
+    
+    func moveWorkout(from fromIndex: Int, to toIndex: Int) {
+        if fromIndex == toIndex {
+            return
+        }
+        
+        let movedWorkout = workouts[fromIndex]
+        
+        workouts.remove(at: fromIndex)
+        
+        workouts.insert(movedWorkout, at: toIndex)
+    }
+    
 }
