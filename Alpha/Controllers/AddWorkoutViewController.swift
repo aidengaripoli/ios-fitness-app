@@ -53,6 +53,7 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
+        
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
@@ -78,7 +79,15 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     }
  
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        view.endEditing(true)
     }
     
     // MARK: - Segues

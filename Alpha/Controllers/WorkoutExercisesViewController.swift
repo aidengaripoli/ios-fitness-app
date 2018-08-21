@@ -23,11 +23,8 @@ class WorkoutExercisesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(workout.name)
-        
-        for ex in workout.exercises {
-            print(ex.name)
-        }
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 68
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -36,6 +33,18 @@ class WorkoutExercisesViewController: UITableViewController {
     
     // MARK: - TableView
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return workout.exercises.count
+    }
     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        let exercise = workout.exercises[indexPath.row]
+        
+        cell.textLabel?.text = exercise.name
+        
+        return cell
+    }
     
 }

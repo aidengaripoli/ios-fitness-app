@@ -12,7 +12,7 @@ class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableV
     
     // MARK: - Outlets
     
-    @IBOutlet var exercisesTableView: UITableView!
+    @IBOutlet var tableView: UITableView!
     
     // MARK: - Properties
     
@@ -46,8 +46,11 @@ class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableV
         searchController.searchBar.scopeButtonTitles = ["All", "Chest", "Shoulders", "Lats", "Biceps"]
         searchController.searchBar.delegate = self
         
-        exercisesTableView.dataSource = self
-        exercisesTableView.delegate = self
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 68
         
         updateSelectedExercises()
     }
@@ -140,7 +143,7 @@ class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
         
-        exercisesTableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+        tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -164,7 +167,7 @@ class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableV
             return doesMuscleMatch && exercise.name.lowercased().contains(searchText.lowercased())
         })
         
-        exercisesTableView.reloadData()
+        tableView.reloadData()
     }
     
     func isFiltering() -> Bool {
