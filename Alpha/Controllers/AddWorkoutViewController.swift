@@ -14,7 +14,7 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var newWorkout = Workout()
     
-    @IBOutlet var tableView: UITableView!
+    var workoutStore: WorkoutStore!
     
     //-- TODO: refactor this store to somewhere else
     // as it does not make sense here (i think?)
@@ -25,6 +25,36 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     // the select exercise feature not work
     var exerciseStore = ExerciseStore()
     //--
+    
+    // MARK: - Outlets
+    
+    @IBOutlet var tableView: UITableView!
+    
+    @IBOutlet var workoutNameField: UITextField!
+    
+    @IBOutlet var dateLabel: UILabel!
+    
+    // MARK: - Actions
+    
+    @IBAction func save(_ sender: UIBarButtonItem) {
+        // save the new workout
+        // need to validate the name label first however.
+        
+        // temp. assume not empty
+        newWorkout.name = workoutNameField.text!
+        
+        workoutStore.workouts.append(newWorkout)
+    
+        for w in workoutStore.workouts {
+            print("Workout Store: \(w.name)")
+        }
+        
+        presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        presentingViewController?.dismiss(animated: true, completion: nil)
+    }
     
     // MARK: - Lifecycle Methods
     

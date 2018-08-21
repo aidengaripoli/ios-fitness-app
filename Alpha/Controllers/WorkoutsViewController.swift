@@ -23,15 +23,15 @@ class WorkoutsViewController: UITableViewController {
     
     // MARK: - Actions
     
-    @IBAction func addWorkout(_ sender: UIBarButtonItem) {
-        let workout = workoutStore.createWorkout()
-        
-        if let index = workoutStore.workouts.index(of: workout) {
-            let indexPath = IndexPath(row: index, section: 0)
-            
-            tableView.insertRows(at: [indexPath], with: .automatic)
-        }
-    }
+//    @IBAction func addWorkout(_ sender: UIBarButtonItem) {
+//        let workout = workoutStore.createWorkout()
+//
+//        if let index = workoutStore.workouts.index(of: workout) {
+//            let indexPath = IndexPath(row: index, section: 0)
+//
+//            tableView.insertRows(at: [indexPath], with: .automatic)
+//        }
+//    }
     
     // MARK: - Init
     
@@ -47,6 +47,25 @@ class WorkoutsViewController: UITableViewController {
         super.viewDidLoad()
         
         print(#function)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
+    // MARK: - Segues
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "addWorkout":
+            let navigationController = segue.destination as! UINavigationController
+            let addWorkoutViewController = navigationController.viewControllers.first as! AddWorkoutViewController
+            addWorkoutViewController.workoutStore = workoutStore
+        default:
+            preconditionFailure("Unexpected segue identifier.")
+        }
     }
     
     // MARK: - UITableViewDataSource Methods

@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TQ3-hi-wMf">
-                                <rect key="frame" x="8" y="72" width="398" height="607"/>
+                                <rect key="frame" x="8" y="72" width="398" height="612"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yD7-HU-cwf">
                                         <rect key="frame" x="0.0" y="0.0" width="398" height="30"/>
@@ -46,7 +46,7 @@
                                         </subviews>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="248" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rg6-Kp-WVB">
-                                        <rect key="frame" x="0.0" y="66.333333333333314" width="398" height="540.66666666666674"/>
+                                        <rect key="frame" x="0.0" y="66.333333333333314" width="398" height="545.66666666666674"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExerciseCell" textLabel="BKg-5p-p48" style="IBUITableViewCellStyleDefault" id="LmU-YR-Gt4">
@@ -71,7 +71,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4z-fg-M87">
-                                <rect key="frame" x="0.0" y="637" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="642" width="414" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="E9i-U6-oNN"/>
@@ -84,23 +84,39 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="TQ3-hi-wMf" firstAttribute="top" secondItem="XGh-l7-LpY" secondAttribute="top" constant="8" id="6gH-nV-hr7"/>
-                            <constraint firstItem="XGh-l7-LpY" firstAttribute="bottom" secondItem="TQ3-hi-wMf" secondAttribute="bottom" constant="8" id="Bcb-dG-ZAU"/>
+                            <constraint firstItem="XGh-l7-LpY" firstAttribute="trailing" secondItem="TQ3-hi-wMf" secondAttribute="trailing" constant="8" id="Eb5-gr-Oci"/>
                             <constraint firstItem="TQ3-hi-wMf" firstAttribute="leading" secondItem="XGh-l7-LpY" secondAttribute="leading" constant="8" id="MQg-vL-hHh"/>
-                            <constraint firstItem="XGh-l7-LpY" firstAttribute="trailing" secondItem="b4z-fg-M87" secondAttribute="trailing" id="fwv-mZ-g8P"/>
-                            <constraint firstItem="XGh-l7-LpY" firstAttribute="bottom" secondItem="b4z-fg-M87" secondAttribute="bottom" id="hAV-F0-XHP"/>
-                            <constraint firstItem="b4z-fg-M87" firstAttribute="leading" secondItem="XGh-l7-LpY" secondAttribute="leading" id="lQR-fc-9wt"/>
-                            <constraint firstItem="XGh-l7-LpY" firstAttribute="trailing" secondItem="TQ3-hi-wMf" secondAttribute="trailing" constant="8" id="ncu-hI-QSJ"/>
+                            <constraint firstItem="b4z-fg-M87" firstAttribute="leading" secondItem="XGh-l7-LpY" secondAttribute="leading" id="Z2n-cB-p6u"/>
+                            <constraint firstItem="TQ3-hi-wMf" firstAttribute="top" secondItem="XGh-l7-LpY" secondAttribute="top" constant="8" id="aGS-Ct-Rsk"/>
+                            <constraint firstItem="XGh-l7-LpY" firstAttribute="trailing" secondItem="b4z-fg-M87" secondAttribute="trailing" id="gG0-nb-Fkg"/>
+                            <constraint firstItem="b4z-fg-M87" firstAttribute="bottom" secondItem="XGh-l7-LpY" secondAttribute="bottom" id="nbk-Yg-x8K"/>
+                            <constraint firstItem="b4z-fg-M87" firstAttribute="top" secondItem="TQ3-hi-wMf" secondAttribute="bottom" constant="-42" id="sl1-Kk-qOm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XGh-l7-LpY"/>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="New Workout" id="C9D-bh-Vw9">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="5LW-ob-epF">
+                            <connections>
+                                <action selector="cancel:" destination="4fl-hN-UbC" id="11E-qw-YIt"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="GoX-I2-isx">
+                            <connections>
+                                <action selector="save:" destination="4fl-hN-UbC" id="lSh-eJ-uLm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="dateLabel" destination="X3G-vP-CbW" id="2sT-i4-x8n"/>
                         <outlet property="tableView" destination="rg6-Kp-WVB" id="Ccw-1j-HP6"/>
+                        <outlet property="workoutNameField" destination="yD7-HU-cwf" id="d8i-qI-DCo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fnS-0F-gIr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3477" y="-294"/>
+            <point key="canvasLocation" x="4384.057971014493" y="-294.29347826086956"/>
         </scene>
         <!--Select Exercises-->
         <scene sceneID="fRg-Cb-J1V">
@@ -111,7 +127,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="57S-Pa-X83">
-                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="628"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExerciseCell" rowHeight="68" id="bhf-0n-sBK" customClass="ExerciseCell" customModule="Alpha" customModuleProvider="target">
@@ -167,7 +183,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PHd-Mb-elK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4321.739130434783" y="-294.29347826086956"/>
+            <point key="canvasLocation" x="5228.985507246377" y="-294.29347826086956"/>
         </scene>
         <!--Workouts-->
         <scene sceneID="6Ak-0v-Efw">
@@ -223,8 +239,7 @@
                     <navigationItem key="navigationItem" title="Workouts" id="5JC-J9-xit">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="v0n-Xh-tlq">
                             <connections>
-                                <action selector="addWorkout:" destination="TQI-zT-3EC" id="Zyi-Yh-FGl"/>
-                                <segue destination="4fl-hN-UbC" kind="show" id="RnO-gF-vbx"/>
+                                <segue destination="e91-VE-e9o" kind="presentation" identifier="addWorkout" id="RnO-gF-vbx"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -378,6 +393,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="43z-TL-FuO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1689.8550724637682" y="436.95652173913049"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="j8h-qr-i12">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="e91-VE-e9o" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rEL-hQ-Etm">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4fl-hN-UbC" kind="relationship" relationship="rootViewController" id="Ng4-7T-gAr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r9z-sk-04e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3476.811594202899" y="-294.29347826086956"/>
         </scene>
     </scenes>
 </document>
