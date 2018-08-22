@@ -14,6 +14,9 @@
 		8F5609692129770600905908 /* ExerciseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5609682129770600905908 /* ExerciseStore.swift */; };
 		8F56096B212A946000905908 /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F56096A212A946000905908 /* ExerciseCell.swift */; };
 		8F571821212420CC001DA827 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F571820212420CC001DA827 /* TabBarController.swift */; };
+		8FC673FC212D2E1000834893 /* WorkoutCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC673FB212D2E1000834893 /* WorkoutCard.swift */; };
+		8FC673FE212D2E6A00834893 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC673FD212D2E6A00834893 /* HomeViewController.swift */; };
+		8FC67400212D316800834893 /* WorkoutCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC673FF212D316800834893 /* WorkoutCardTableViewCell.swift */; };
 		8FD1F55821251064000E6852 /* WorkoutExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD1F55721251064000E6852 /* WorkoutExercisesViewController.swift */; };
 		8FE8EA1D21219B3500BA6258 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE8EA1C21219B3500BA6258 /* AppDelegate.swift */; };
 		8FE8EA2221219B3500BA6258 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FE8EA2021219B3500BA6258 /* Main.storyboard */; };
@@ -52,6 +55,9 @@
 		8F5609682129770600905908 /* ExerciseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseStore.swift; sourceTree = "<group>"; };
 		8F56096A212A946000905908 /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
 		8F571820212420CC001DA827 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		8FC673FB212D2E1000834893 /* WorkoutCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutCard.swift; sourceTree = "<group>"; };
+		8FC673FD212D2E6A00834893 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		8FC673FF212D316800834893 /* WorkoutCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutCardTableViewCell.swift; sourceTree = "<group>"; };
 		8FD1F55721251064000E6852 /* WorkoutExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExercisesViewController.swift; sourceTree = "<group>"; };
 		8FE8EA1921219B3500BA6258 /* Alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alpha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FE8EA1C21219B3500BA6258 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -178,6 +184,9 @@
 				8F2AE6F0212835310066C8E4 /* AddExerciseViewController.swift */,
 				8FD1F55721251064000E6852 /* WorkoutExercisesViewController.swift */,
 				8F56096A212A946000905908 /* ExerciseCell.swift */,
+				8FC673FD212D2E6A00834893 /* HomeViewController.swift */,
+				8FC673FF212D316800834893 /* WorkoutCardTableViewCell.swift */,
+				8FC673FB212D2E1000834893 /* WorkoutCard.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -314,14 +323,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FE8EA502121A3C600BA6258 /* WorkoutCell.swift in Sources */,
+				8FC67400212D316800834893 /* WorkoutCardTableViewCell.swift in Sources */,
 				8F2AE6F3212835FC0066C8E4 /* AddWorkoutViewController.swift in Sources */,
 				8F2AE6EF21282DC50066C8E4 /* Exercise.swift in Sources */,
 				8F56096B212A946000905908 /* ExerciseCell.swift in Sources */,
 				8FE8EA1D21219B3500BA6258 /* AppDelegate.swift in Sources */,
+				8FC673FE212D2E6A00834893 /* HomeViewController.swift in Sources */,
 				8F2AE6F1212835310066C8E4 /* AddExerciseViewController.swift in Sources */,
 				8FE8EA542124126500BA6258 /* WorkoutStore.swift in Sources */,
 				8F571821212420CC001DA827 /* TabBarController.swift in Sources */,
 				8F2AE6F721283B8D0066C8E4 /* Muscle.swift in Sources */,
+				8FC673FC212D2E1000834893 /* WorkoutCard.swift in Sources */,
 				8FD1F55821251064000E6852 /* WorkoutExercisesViewController.swift in Sources */,
 				8FE8EA4B2121A12000BA6258 /* WorkoutsViewController.swift in Sources */,
 				8FE8EA522124124400BA6258 /* Workout.swift in Sources */,

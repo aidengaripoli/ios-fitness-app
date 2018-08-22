@@ -199,7 +199,6 @@ extension AddExerciseViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
         searchBar.selectedScopeButtonIndex = 0
         searchBar.text = ""
         

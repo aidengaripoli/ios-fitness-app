@@ -19,16 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         print(#function)
-
-//        let navigationController = window!.rootViewController as! UINavigationController
-//        let itemsController = navigationController.topViewController as! ItemsViewController
-//        itemsController.itemStore = itemStore
-//        itemsController.imageStore = imageStore
         
         let tabController = window!.rootViewController as! UITabBarController
+        
         let navigationController = tabController.childViewControllers[0] as! UINavigationController
         let workoutsController = navigationController.topViewController as! WorkoutsViewController
         workoutsController.workoutStore = workoutStore
+        
+        let homeViewController = tabController.childViewControllers[1] as! HomeViewController
+        homeViewController.workoutStore = workoutStore
         
         return true
     }
