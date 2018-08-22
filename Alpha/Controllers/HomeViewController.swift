@@ -8,11 +8,22 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController {
     
     // MARK: - Properties
     
     var workoutStore: WorkoutStore!
+    
+    var previousWorkouts: [Workout] = []
+    
+    var currentWorkouts: [Workout] = []
+    
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }()
     
     // MARK: - Outlets
     
@@ -28,20 +39,33 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.rowHeight = 120
+        // temp
+        tableView.rowHeight = 200
+        
+        //temp
+        workoutStore.createWorkouts(amount: 5)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        for w in workoutStore.workouts {
-            print(w.name)
+        previousWorkouts.removeAll()
+        currentWorkouts.removeAll()
+        
+        for workout in workoutStore.workouts {
+            if Date().addingTimeInterval(-604800) > workout.dateCreated {
+                previousWorkouts.append(workout)
+            } else {
+                currentWorkouts.append(workout)
+            }
         }
         
         tableView.reloadData()
     }
+    
+}
 
-    // MARK: - Table View Methods
+extension HomeViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -54,12 +78,74 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WorkoutCardTableViewCell", for: indexPath) as! WorkoutCardTableViewCell
         
-        print(#function)
-        print(workoutStore.workouts)
+        cell.collectionView.delegate = self
+        cell.collectionView.dataSource = self
         
-        cell.workouts = workoutStore.workouts
+        cell.collectionView.tag = indexPath.section
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Last Week"
+        }
+        
+        return "This Week"
+    }
+    
+}
+
+extension HomeViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = cell as! WorkoutCardTableViewCell
+        cell.collectionView.reloadData()
+        cell.collectionView.contentOffset = .zero
+    }
+    
+}
+
+extension HomeViewController: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView.tag == 0 {
+            return previousWorkouts.count
+        }
+        
+        return currentWorkouts.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WorkoutCardCollectionViewCell", for: indexPath) as! WorkoutCardCollectionViewCell
+        
+        print("Workout Name In Cell: \(workoutStore.workouts[indexPath.item].name)")
+        
+        return cell
+    }
+    
+}
+
+extension HomeViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let cell = cell as! WorkoutCardCollectionViewCell
+        
+        let workout: Workout
+        
+        if collectionView.tag == 0 {
+            workout = previousWorkouts[indexPath.item]
+        } else {
+            workout = currentWorkouts[indexPath.item]
+        }
+        
+        cell.nameLabel.text = workout.name
+        cell.dateLabel.text = dateFormatter.string(from: workout.dateCreated)
     }
     
 }

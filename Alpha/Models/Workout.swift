@@ -18,15 +18,8 @@ class Workout: NSObject {
         self.dateCreated = Date()
     }
     
-//    func setExercises(exercises: [Exercise]) {
-//        clearExercises()
-//
-//        for exercise in exercises {
-//            self.exercises.append(exercise)
-//        }
-//    }
-//
-//    func clearExercises() {
-//        self.exercises = []
-//    }
+    init(date: Date) {
+        self.dateCreated = date
+    }
+    
 }

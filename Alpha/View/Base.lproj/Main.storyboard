@@ -356,60 +356,73 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FhQ-o5-aKd">
-                                <rect key="frame" x="28" y="103" width="358" height="318"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FhQ-o5-aKd">
+                                <rect key="frame" x="0.0" y="76" width="414" height="561"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WorkoutCardTableViewCell" rowHeight="120" id="Evi-yP-g8T" customClass="WorkoutCardTableViewCell" customModule="Alpha" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="358" height="120"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WorkoutCardTableViewCell" rowHeight="237" id="Evi-yP-g8T" customClass="WorkoutCardTableViewCell" customModule="Alpha" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="237"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Evi-yP-g8T" id="dHw-8w-FDA">
-                                            <rect key="frame" x="0.0" y="0.0" width="358" height="119.66666666666667"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="236.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="whY-MV-Pbh">
-                                                    <rect key="frame" x="60" y="20" width="239" height="75"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="whY-MV-Pbh">
+                                                    <rect key="frame" x="20" y="11" width="374" height="215"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3gA-Rk-XkV">
-                                                        <size key="itemSize" width="149" height="62"/>
+                                                        <size key="itemSize" width="160" height="123"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WorkoutCardCell" id="dMc-e5-2PP" customClass="WorkoutCard" customModule="Alpha" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="6.666666666666667" width="149" height="62"/>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WorkoutCardCollectionViewCell" id="dMc-e5-2PP" customClass="WorkoutCardCollectionViewCell" customModule="Alpha" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="46" width="158" height="123"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                                <rect key="frame" x="0.0" y="0.0" width="149" height="62"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="158" height="123"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PbL-Sf-XC3">
-                                                                        <rect key="frame" x="16" y="20" width="117" height="42"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PbL-Sf-XC3">
+                                                                        <rect key="frame" x="24" y="28" width="45" height="20.333333333333329"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <color key="textColor" red="0.97900369978007484" green="1" blue="0.94982656426188738" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQG-yJ-4an">
+                                                                        <rect key="frame" x="24" y="64" width="42" height="21"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
                                                             </view>
+                                                            <color key="backgroundColor" red="0.0" green="0.65343141740827271" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
-                                                                <constraint firstItem="PbL-Sf-XC3" firstAttribute="top" secondItem="dMc-e5-2PP" secondAttribute="topMargin" id="224-Xs-TZj"/>
-                                                                <constraint firstAttribute="bottomMargin" secondItem="PbL-Sf-XC3" secondAttribute="bottom" id="BYN-bi-KpB"/>
-                                                                <constraint firstItem="PbL-Sf-XC3" firstAttribute="leading" secondItem="dMc-e5-2PP" secondAttribute="leadingMargin" id="KZr-5q-XEk"/>
-                                                                <constraint firstAttribute="trailingMargin" secondItem="PbL-Sf-XC3" secondAttribute="trailing" id="f3h-gA-o0E"/>
+                                                                <constraint firstItem="HQG-yJ-4an" firstAttribute="leading" secondItem="dMc-e5-2PP" secondAttribute="leading" constant="24" id="4RK-fr-eJj"/>
+                                                                <constraint firstItem="HQG-yJ-4an" firstAttribute="top" secondItem="PbL-Sf-XC3" secondAttribute="bottom" constant="15.666666666666671" id="hZF-Eb-gCe"/>
+                                                                <constraint firstItem="PbL-Sf-XC3" firstAttribute="leading" secondItem="dMc-e5-2PP" secondAttribute="leadingMargin" constant="8" id="jKh-WQ-dcq"/>
+                                                                <constraint firstItem="PbL-Sf-XC3" firstAttribute="top" secondItem="dMc-e5-2PP" secondAttribute="topMargin" constant="8" id="y3B-eO-F4b"/>
                                                             </constraints>
+                                                            <size key="customSize" width="158" height="123"/>
                                                             <connections>
-                                                                <outlet property="nameLabel" destination="PbL-Sf-XC3" id="8nX-yA-Evb"/>
+                                                                <outlet property="dateLabel" destination="HQG-yJ-4an" id="fbt-lD-OOp"/>
+                                                                <outlet property="nameLabel" destination="PbL-Sf-XC3" id="n2W-uR-cfB"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="whY-MV-Pbh" secondAttribute="bottom" id="DIr-YQ-LZZ"/>
+                                                <constraint firstItem="whY-MV-Pbh" firstAttribute="leading" secondItem="dHw-8w-FDA" secondAttribute="leadingMargin" id="FIP-Kr-5iI"/>
+                                                <constraint firstItem="whY-MV-Pbh" firstAttribute="top" secondItem="dHw-8w-FDA" secondAttribute="topMargin" id="ThH-B9-WCR"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="whY-MV-Pbh" secondAttribute="trailing" id="s5S-Fn-MzE"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="collectionView" destination="whY-MV-Pbh" id="aPN-6l-G47"/>
+                                            <outlet property="collectionView" destination="whY-MV-Pbh" id="bQS-ye-hCd"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -418,10 +431,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="4fe-Oa-M0E" firstAttribute="trailing" secondItem="Fzl-dI-15Q" secondAttribute="trailing" constant="8" id="Ftz-vR-6BR"/>
+                            <constraint firstItem="FhQ-o5-aKd" firstAttribute="top" secondItem="Fzl-dI-15Q" secondAttribute="bottom" id="Kr0-dz-RUK"/>
                             <constraint firstItem="4fe-Oa-M0E" firstAttribute="trailing" secondItem="SJv-mF-uDy" secondAttribute="trailing" id="PDP-YR-bMy"/>
                             <constraint firstItem="4fe-Oa-M0E" firstAttribute="bottom" secondItem="SJv-mF-uDy" secondAttribute="bottom" id="PUO-FV-7tH"/>
+                            <constraint firstItem="4fe-Oa-M0E" firstAttribute="trailing" secondItem="FhQ-o5-aKd" secondAttribute="trailing" id="Vry-as-GWQ"/>
                             <constraint firstItem="SJv-mF-uDy" firstAttribute="leading" secondItem="4fe-Oa-M0E" secondAttribute="leading" id="cak-S1-QfU"/>
                             <constraint firstItem="Fzl-dI-15Q" firstAttribute="leading" secondItem="4fe-Oa-M0E" secondAttribute="leading" constant="8" id="nYD-Rg-IE8"/>
+                            <constraint firstItem="SJv-mF-uDy" firstAttribute="top" secondItem="FhQ-o5-aKd" secondAttribute="bottom" id="qYJ-CQ-bcN"/>
+                            <constraint firstItem="FhQ-o5-aKd" firstAttribute="leading" secondItem="4fe-Oa-M0E" secondAttribute="leading" id="rf5-tI-Bkr"/>
                             <constraint firstItem="Fzl-dI-15Q" firstAttribute="top" secondItem="4fe-Oa-M0E" secondAttribute="top" constant="8" id="vXz-gc-i92"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4fe-Oa-M0E"/>
