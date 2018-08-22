@@ -26,6 +26,13 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     var exerciseStore = ExerciseStore()
     //--
     
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }()
+    
     // MARK: - Outlets
     
     @IBOutlet var tableView: UITableView!
@@ -81,6 +88,8 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        dateLabel.text = dateFormatter.string(from: newWorkout.dateCreated)
+        
         tableView.reloadData()
     }
     
@@ -104,6 +113,10 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     // MARK: - TableView
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Exercises"
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newWorkout.exercises.count
