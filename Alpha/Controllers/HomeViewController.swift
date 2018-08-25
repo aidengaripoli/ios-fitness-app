@@ -12,7 +12,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Properties
     
-    var workoutStore: WorkoutStore!
+    var workoutStore = Model.shared.workoutStore
     
     var previousWorkouts: [Workout] = []
     
@@ -43,7 +43,7 @@ class HomeViewController: UIViewController {
         tableView.rowHeight = 200
         
         //temp
-        workoutStore.createWorkouts(amount: 5)
+        workoutStore.createDummyWorkouts(amount: 5)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,6 +53,7 @@ class HomeViewController: UIViewController {
         currentWorkouts.removeAll()
         
         for workout in workoutStore.workouts {
+            // 604800 seconds = 7 days
             if Date().addingTimeInterval(-604800) > workout.dateCreated {
                 previousWorkouts.append(workout)
             } else {

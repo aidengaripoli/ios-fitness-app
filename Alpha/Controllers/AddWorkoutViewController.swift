@@ -12,19 +12,7 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // MARK: - Properties
     
-    var newWorkout = Workout()
-    
-    var workoutStore: WorkoutStore!
-    
-    //-- TODO: refactor this store to somewhere else
-    // as it does not make sense here (i think?)
-    // Its only here because otherwise if i put it
-    // in the AddExerciseViewController it would be
-    // recreated each time the view loads therefore
-    // recreated the objects in memory and making
-    // the select exercise feature not work
-    var exerciseStore = ExerciseStore()
-    //--
+    var newWorkout = Model.shared.createNewWorkout()
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -50,17 +38,13 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
         // temp. assume not empty
         newWorkout.name = workoutNameField.text!
         
-        workoutStore.workouts.append(newWorkout)
-    
-        for w in workoutStore.workouts {
-            print("Workout Store: \(w.name)")
-        }
+//        workoutStore.workouts.append(newWorkout)
+        Model.shared.saveNewWorkout(workout: newWorkout)
         
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
@@ -73,16 +57,12 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("AddWorkoutViewController - \(#function)")
-        
         tableView.delegate = self
         tableView.dataSource = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        print("AddWorkoutViewController - \(#function)")
     }
  
     override func viewWillAppear(_ animated: Bool) {
@@ -104,9 +84,8 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "selectExercises":
-            let addExerciseViewController = segue.destination as! AddExerciseViewController
-            addExerciseViewController.workout = newWorkout
-            addExerciseViewController.exerciseStore = exerciseStore
+            let selectExerciseViewController = segue.destination as! SelectExerciseViewController
+            selectExerciseViewController.workout = newWorkout
         default:
             preconditionFailure("Unexpected segue identifier.")
         }
@@ -136,6 +115,7 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        
         return true
     }
     

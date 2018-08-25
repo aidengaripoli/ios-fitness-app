@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Outlets
     
@@ -18,23 +18,18 @@ class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableV
     
     var workout: Workout!
     
-//    var workoutStore: WorkoutStore // not sure if needed yet
-    
-//    var exercises = [Exercise]()
-    var exerciseStore: ExerciseStore! // replace with a store
+    var exerciseStore = Model.shared.exerciseStore
     
     var filteredExercises = [Exercise]()
     
-    let searchController = UISearchController(searchResultsController: nil)
-    
     var selectedIndexPaths = [IndexPath]()
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("AddExerciseViewController - \(#function)")
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -180,7 +175,7 @@ class AddExerciseViewController: UIViewController, UITableViewDelegate, UITableV
 
 // MARK: - Extensions
 
-extension AddExerciseViewController: UISearchResultsUpdating {
+extension SelectExerciseViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
@@ -191,7 +186,7 @@ extension AddExerciseViewController: UISearchResultsUpdating {
     
 }
 
-extension AddExerciseViewController: UISearchBarDelegate {
+extension SelectExerciseViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])

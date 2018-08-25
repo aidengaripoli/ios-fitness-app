@@ -130,7 +130,7 @@
         <!--Select Exercises-->
         <scene sceneID="fRg-Cb-J1V">
             <objects>
-                <viewController title="Select Exercises" id="FmB-BR-dwr" customClass="AddExerciseViewController" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Select Exercises" id="FmB-BR-dwr" customClass="SelectExerciseViewController" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Ny-r9-92Z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

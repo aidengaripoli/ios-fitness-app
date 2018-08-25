@@ -10,28 +10,11 @@ import Foundation
 
 class WorkoutStore {
     
+    // MARK: - Stored Properties
+    
     var workouts = [Workout]()
     
-    func createWorkouts(amount: Int) {
-        for i in 0...amount {
-            let newWorkout: Workout
-            
-            if i % 2 == 0 {
-                newWorkout = Workout(date: Date(timeIntervalSinceNow: TimeInterval(-691200)))
-            } else {
-                newWorkout = Workout()
-            }
-            
-            print("Workout Date: \(newWorkout.dateCreated)")
-            
-            newWorkout.name = "Workout #\(i)"
-            newWorkout.exercises.append(
-                Exercise(name: "Bench", muscles: [.chest])
-            )
-            
-            workouts.append(newWorkout)
-        }
-    }
+    // MARK: - Methods
     
     func removeWorkout(_ workout: Workout) {
         if let index = workouts.index(of: workout) {
@@ -49,6 +32,27 @@ class WorkoutStore {
         workouts.remove(at: fromIndex)
         
         workouts.insert(movedWorkout, at: toIndex)
+    }
+
+    // MARK: - Temporary Testing Methods
+    
+    func createDummyWorkouts(amount: Int) {
+        for i in 0...amount {
+            let newWorkout: Workout
+            
+            if i % 2 == 0 {
+                newWorkout = Workout(date: Date(timeIntervalSinceNow: TimeInterval(-691200)))
+            } else {
+                newWorkout = Workout()
+            }
+            
+            newWorkout.name = "Workout #\(i)"
+            newWorkout.exercises.append(
+                Exercise(name: "Bench", muscles: [.chest])
+            )
+            
+            workouts.append(newWorkout)
+        }
     }
     
 }

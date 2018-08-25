@@ -12,7 +12,7 @@ class WorkoutsViewController: UITableViewController {
     
     // MARK: - Properties
     
-    var workoutStore: WorkoutStore!
+    var workoutStore = Model.shared.workoutStore
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -22,16 +22,6 @@ class WorkoutsViewController: UITableViewController {
     }()
     
     // MARK: - Actions
-    
-//    @IBAction func addWorkout(_ sender: UIBarButtonItem) {
-//        let workout = workoutStore.createWorkout()
-//
-//        if let index = workoutStore.workouts.index(of: workout) {
-//            let indexPath = IndexPath(row: index, section: 0)
-//
-//            tableView.insertRows(at: [indexPath], with: .automatic)
-//        }
-//    }
     
     // MARK: - Init
     
@@ -60,9 +50,10 @@ class WorkoutsViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "addWorkout":
-            let navigationController = segue.destination as! UINavigationController
-            let addWorkoutViewController = navigationController.viewControllers.first as! AddWorkoutViewController
-            addWorkoutViewController.workoutStore = workoutStore
+            break
+//            let navigationController = segue.destination as! UINavigationController
+//            let addWorkoutViewController = navigationController.viewControllers.first as! AddWorkoutViewController
+//            addWorkoutViewController.workoutStore = workoutStore
         case "showExercises":
             if let row = tableView.indexPathForSelectedRow?.row {
                 let workout = workoutStore.workouts[row]

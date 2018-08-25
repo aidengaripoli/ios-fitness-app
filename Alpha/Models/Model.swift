@@ -10,14 +10,22 @@ import UIKit
 
 class Model {
     
-    static let model = Model()
+    static let shared = Model()
     
     var workoutStore = WorkoutStore()
     
     var exerciseStore = ExerciseStore()
     
-    private init() {
+    private init() {}
+    
+    func createNewWorkout() -> Workout {
+        let workout = Workout()
         
+        return workout
+    }
+    
+    func saveNewWorkout(workout: Workout) {
+        workoutStore.workouts.append(workout)
     }
     
 }
