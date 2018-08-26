@@ -11,8 +11,10 @@ import UIKit
 class Workout: NSObject {
     
     var name: String = ""
+    
     let dateCreated: Date
-    var exercises = [Exercise]()
+    
+    var exerciseInstances = [ExerciseInstance]()
     
     override init() {
         self.dateCreated = Date()

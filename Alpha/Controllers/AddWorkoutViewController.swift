@@ -12,7 +12,7 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // MARK: - Properties
     
-    var newWorkout = Model.shared.createNewWorkout()
+    var newWorkout: Workout!
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -38,8 +38,7 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
         // temp. assume not empty
         newWorkout.name = workoutNameField.text!
         
-//        workoutStore.workouts.append(newWorkout)
-        Model.shared.saveNewWorkout(workout: newWorkout)
+        Model.shared.workoutStore.saveNewWorkout(workout: newWorkout)
         
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
@@ -98,13 +97,13 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newWorkout.exercises.count
+        return newWorkout.exerciseInstances.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath)
         
-        let exercise = newWorkout.exercises[indexPath.row]
+        let exercise = newWorkout.exerciseInstances[indexPath.row].exercise
         
         cell.textLabel?.text = exercise.name
         

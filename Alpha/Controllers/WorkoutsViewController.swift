@@ -50,10 +50,9 @@ class WorkoutsViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "addWorkout":
-            break
-//            let navigationController = segue.destination as! UINavigationController
-//            let addWorkoutViewController = navigationController.viewControllers.first as! AddWorkoutViewController
-//            addWorkoutViewController.workoutStore = workoutStore
+            let navigationController = segue.destination as! UINavigationController
+            let addWorkoutViewController = navigationController.viewControllers.first as! AddWorkoutViewController
+            addWorkoutViewController.newWorkout = workoutStore.createNewWorkout()
         case "showExercises":
             if let row = tableView.indexPathForSelectedRow?.row {
                 let workout = workoutStore.workouts[row]

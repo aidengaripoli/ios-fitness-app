@@ -41,9 +41,6 @@ class HomeViewController: UIViewController {
         
         // temp
         tableView.rowHeight = 200
-        
-        //temp
-        workoutStore.createDummyWorkouts(amount: 5)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,6 +59,19 @@ class HomeViewController: UIViewController {
         }
         
         tableView.reloadData()
+    }
+    
+    // MARK: - Segues
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "addWorkout":
+            let navigationController = segue.destination as! UINavigationController
+            let addWorkoutViewController = navigationController.viewControllers.first as! AddWorkoutViewController
+            addWorkoutViewController.newWorkout = workoutStore.createNewWorkout()
+        default:
+            preconditionFailure("Unexpected Segue Identifier")
+        }
     }
     
 }
@@ -124,8 +134,6 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WorkoutCardCollectionViewCell", for: indexPath) as! WorkoutCardCollectionViewCell
-        
-        print("Workout Name In Cell: \(workoutStore.workouts[indexPath.item].name)")
         
         return cell
     }

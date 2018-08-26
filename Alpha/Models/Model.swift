@@ -18,14 +18,4 @@ class Model {
     
     private init() {}
     
-    func createNewWorkout() -> Workout {
-        let workout = Workout()
-        
-        return workout
-    }
-    
-    func saveNewWorkout(workout: Workout) {
-        workoutStore.workouts.append(workout)
-    }
-    
 }

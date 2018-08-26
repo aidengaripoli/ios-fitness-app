@@ -11,6 +11,7 @@ import UIKit
 class ExerciseCell: UITableViewCell {
     
     @IBOutlet var nameLabel: UILabel!
+    
     @IBOutlet var musclesLabel: UILabel!
     
 }

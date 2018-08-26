@@ -34,6 +34,22 @@ class WorkoutStore {
         workouts.insert(movedWorkout, at: toIndex)
     }
 
+    func createNewWorkout() -> Workout {
+        let workout = Workout()
+        
+        return workout
+    }
+    
+    func createNewWorkout(date: Date) -> Workout {
+        let workout = Workout(date: date)
+        
+        return workout
+    }
+    
+    func saveNewWorkout(workout: Workout) {
+         workouts.append(workout)
+    }
+    
     // MARK: - Temporary Testing Methods
     
     func createDummyWorkouts(amount: Int) {
@@ -41,17 +57,17 @@ class WorkoutStore {
             let newWorkout: Workout
             
             if i % 2 == 0 {
-                newWorkout = Workout(date: Date(timeIntervalSinceNow: TimeInterval(-691200)))
+                newWorkout = createNewWorkout(date: Date(timeIntervalSinceNow: TimeInterval(-691200)))
             } else {
-                newWorkout = Workout()
+                newWorkout = createNewWorkout()
             }
             
             newWorkout.name = "Workout #\(i)"
-            newWorkout.exercises.append(
-                Exercise(name: "Bench", muscles: [.chest])
+            newWorkout.exerciseInstances.append(
+                ExerciseInstance(exercise: Model.shared.exerciseStore.exercises[0])
             )
             
-            workouts.append(newWorkout)
+            saveNewWorkout(workout: newWorkout)
         }
     }
     

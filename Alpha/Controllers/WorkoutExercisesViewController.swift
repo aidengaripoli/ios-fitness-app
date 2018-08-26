@@ -27,20 +27,41 @@ class WorkoutExercisesViewController: UITableViewController {
         tableView.estimatedRowHeight = 68
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
+    // MARK: - Segues
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "editExercises":
+            let selectExercisesViewController = segue.destination as! SelectExerciseViewController
+            selectExercisesViewController.workout = workout
+        case "exerciseDetail":
+            if let row = tableView.indexPathForSelectedRow?.row {
+                let exerciseInstance = workout.exerciseInstances[row]
+                
+                let exerciseDetailViewController = segue.destination as! ExerciseDetailViewController
+                exerciseDetailViewController.exerciseInstance = exerciseInstance
+            }
+        default:
+            preconditionFailure("")
+        }
     }
     
     // MARK: - TableView
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return workout.exercises.count
+        return workout.exerciseInstances.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let exercise = workout.exercises[indexPath.row]
+        let exercise = workout.exerciseInstances[indexPath.row].exercise
         
         cell.textLabel?.text = exercise.name
         

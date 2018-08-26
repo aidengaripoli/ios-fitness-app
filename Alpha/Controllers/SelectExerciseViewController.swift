@@ -81,7 +81,6 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
             }
         }
         
-//        cell.textLabel?.text = exercise.name
         cell.nameLabel.text = exercise.name
         cell.musclesLabel.text = musclesString
         
@@ -99,12 +98,15 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         
         if let index = selectedIndexPaths.index(of: indexPath) {
             selectedIndexPaths.remove(at: index)
-            if let exerciseIndex = workout.exercises.index(of: exercise) {
-                workout.exercises.remove(at: exerciseIndex)
+            for instance in workout.exerciseInstances {
+                if instance.exercise === exercise {
+                    workout.exerciseInstances.remove(at: workout.exerciseInstances.index(of: instance)!)
+                }
             }
         } else {
             selectedIndexPaths.append(indexPath)
-            workout.exercises.append(exercise)
+            let instance = ExerciseInstance(exercise: exercise)
+            workout.exerciseInstances.append(instance)
         }
         
         tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -131,8 +133,8 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
             exercises = exerciseStore.exercises
         }
         
-        for exercise in workout.exercises {
-            if let index = exercises.index(of: exercise) {
+        for instance in workout.exerciseInstances {
+            if let index = exercises.index(of: instance.exercise) {
                 let indexPath = IndexPath(row: index, section: 0)
                 selectedIndexPaths.append(indexPath)
             }
