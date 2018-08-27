@@ -10,10 +10,10 @@ import UIKit
 
 class ExerciseSetCell: UITableViewCell {
     
-    @IBOutlet var setNumberLabel: UILabel!
+    @IBOutlet var setLabel: UILabel!
     
-    @IBOutlet var setWeightTextField: UITextField!
+    @IBOutlet var weightField: UITextField!
     
-    @IBOutlet var setRepsTextField: UITextField!
+    @IBOutlet var repsField: UITextField!
     
 }

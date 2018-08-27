@@ -11,6 +11,7 @@
 		8F04D3DF2131033300887201 /* ExerciseInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F04D3DE2131033300887201 /* ExerciseInstance.swift */; };
 		8F04D3E12131172100887201 /* ExerciseSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F04D3E02131172100887201 /* ExerciseSetCell.swift */; };
 		8F04D3E321311A0600887201 /* ExerciseMuscleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F04D3E221311A0600887201 /* ExerciseMuscleCell.swift */; };
+		8F04D3E52132C2AB00887201 /* PickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F04D3E42132C2AB00887201 /* PickerViewDelegate.swift */; };
 		8F2AE6EF21282DC50066C8E4 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2AE6EE21282DC50066C8E4 /* Exercise.swift */; };
 		8F2AE6F1212835310066C8E4 /* SelectExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2AE6F0212835310066C8E4 /* SelectExerciseViewController.swift */; };
 		8F2AE6F3212835FC0066C8E4 /* AddWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2AE6F2212835FC0066C8E4 /* AddWorkoutViewController.swift */; };
@@ -57,6 +58,7 @@
 		8F04D3DE2131033300887201 /* ExerciseInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseInstance.swift; sourceTree = "<group>"; };
 		8F04D3E02131172100887201 /* ExerciseSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetCell.swift; sourceTree = "<group>"; };
 		8F04D3E221311A0600887201 /* ExerciseMuscleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseMuscleCell.swift; sourceTree = "<group>"; };
+		8F04D3E42132C2AB00887201 /* PickerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewDelegate.swift; sourceTree = "<group>"; };
 		8F2AE6EE21282DC50066C8E4 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		8F2AE6F0212835310066C8E4 /* SelectExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectExerciseViewController.swift; sourceTree = "<group>"; };
 		8F2AE6F2212835FC0066C8E4 /* AddWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutViewController.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				8FD1F55721251064000E6852 /* WorkoutExercisesViewController.swift */,
 				8FC673FD212D2E6A00834893 /* HomeViewController.swift */,
 				8F04D3DC21302EA400887201 /* ExerciseDetailViewController.swift */,
+				8F04D3E42132C2AB00887201 /* PickerViewDelegate.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				8FE8EA502121A3C600BA6258 /* WorkoutCell.swift in Sources */,
 				8F2AE6F3212835FC0066C8E4 /* AddWorkoutViewController.swift in Sources */,
 				8F2AE6EF21282DC50066C8E4 /* Exercise.swift in Sources */,
+				8F04D3E52132C2AB00887201 /* PickerViewDelegate.swift in Sources */,
 				8F56096B212A946000905908 /* ExerciseCell.swift in Sources */,
 				8FC67424212D559700834893 /* WorkoutCardTableViewCell.swift in Sources */,
 				8F04D3DD21302EA400887201 /* ExerciseDetailViewController.swift in Sources */,
