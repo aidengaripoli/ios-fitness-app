@@ -132,8 +132,8 @@ extension ExerciseDetailViewController: UITableViewDataSource {
         cell.repsField.inputAccessoryView = pickerViewToolBar
         
         cell.setLabel.text = "\(indexPath.row + 1)"
-        cell.weightField.text = "\(exerciseInstance.sets[indexPath.row].weight)"
-        cell.repsField.text = "\(exerciseInstance.sets[indexPath.row].reps)"
+        cell.weightField.text = "\(exerciseInstance.sets[indexPath.row].weight) kgs"
+        cell.repsField.text = "\(exerciseInstance.sets[indexPath.row].reps) reps"
         
         return cell
     }
@@ -199,10 +199,10 @@ extension ExerciseDetailViewController: UIPickerViewDelegate {
         if let currentTextField = activeTextField {
             
             if pickerView.tag == 1 {
-                currentTextField.text = "\(weightData[row])"
+                currentTextField.text = "\(weightData[row]) kgs"
                 exerciseInstance.sets[currentTextField.tag].weight = weightData[row]
             } else {
-                currentTextField.text = "\(repsData[row])"
+                currentTextField.text = "\(repsData[row]) reps"
                 exerciseInstance.sets[currentTextField.tag].reps = repsData[row]
             }
             
@@ -221,10 +221,10 @@ extension ExerciseDetailViewController: UITextFieldDelegate {
         return true
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        view.endEditing(true)
-        
-        return true
-    }
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        view.endEditing(true)
+//
+//        return true
+//    }
     
 }
