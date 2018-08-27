@@ -92,7 +92,6 @@ class ExerciseDetailViewController: UIViewController {
 
         pickerViewToolBar.setItems([spacer, doneButton], animated: true)
         pickerViewToolBar.isUserInteractionEnabled = true
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -144,9 +143,9 @@ extension ExerciseDetailViewController: UITableViewDataSource {
 
 extension ExerciseDetailViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Set - Weight - Reps"
-    }
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "Set - Weight - Reps"
+//    }
     
 }
 
