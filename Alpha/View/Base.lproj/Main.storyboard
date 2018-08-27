@@ -489,24 +489,45 @@
         <!--Profile-->
         <scene sceneID="sPW-dj-QJ4">
             <objects>
-                <viewController title="Profile" id="x3V-i2-ilw" sceneMemberID="viewController">
+                <viewController title="Profile" id="x3V-i2-ilw" customClass="ProfileViewController" customModule="Alpha" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RMM-E5-aM1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rpa-Ib-fBk">
-                                <rect key="frame" x="87" y="166" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rpa-Ib-fBk">
+                                <rect key="frame" x="120" y="120" width="175" height="175"/>
+                                <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="175" id="Nvk-sX-66U"/>
+                                    <constraint firstAttribute="width" constant="175" id="W50-6E-wpZ"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="3hV-TB-maJ" appends="YES" id="KRK-IP-FES"/>
+                                </connections>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="rpa-Ib-fBk" firstAttribute="top" secondItem="4yB-OX-RPU" secondAttribute="top" constant="100" id="JCF-ca-voC"/>
+                            <constraint firstItem="rpa-Ib-fBk" firstAttribute="centerX" secondItem="4yB-OX-RPU" secondAttribute="centerX" id="iDn-wU-1u9"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="4yB-OX-RPU"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="9Ru-8C-Qkc"/>
+                    <connections>
+                        <outlet property="imageView" destination="rpa-Ib-fBk" id="XBF-Uv-wJb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hrb-hV-SfR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="3hV-TB-maJ">
+                    <connections>
+                        <action selector="imageViewTapped:" destination="x3V-i2-ilw" id="kg4-DU-Tio"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="913" y="898"/>
+            <point key="canvasLocation" x="911.59420289855075" y="897.554347826087"/>
         </scene>
         <!--Home-->
         <scene sceneID="m3Z-pZ-Qz7">

@@ -76,6 +76,8 @@ class HomeViewController: UIViewController {
     
 }
 
+// MARK: - TableViewDataSource
+
 extension HomeViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -98,14 +100,12 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Last Week"
-        }
-        
-        return "This Week"
+        return section == 0 ? "Last Week" : "This Week"
     }
     
 }
+
+// MARK: - TableViewDelegate
 
 extension HomeViewController: UITableViewDelegate {
     
@@ -117,6 +117,8 @@ extension HomeViewController: UITableViewDelegate {
     
 }
 
+// MARK: - CollectionViewDataSource
+
 extension HomeViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -124,11 +126,7 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView.tag == 0 {
-            return previousWorkouts.count
-        }
-        
-        return currentWorkouts.count
+        return collectionView.tag == 0 ? previousWorkouts.count : currentWorkouts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -140,18 +138,15 @@ extension HomeViewController: UICollectionViewDataSource {
     
 }
 
+// MARK: - CollectionViewDelegate
+
 extension HomeViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let cell = cell as! WorkoutCardCollectionViewCell
-        
         let workout: Workout
         
-        if collectionView.tag == 0 {
-            workout = previousWorkouts[indexPath.item]
-        } else {
-            workout = currentWorkouts[indexPath.item]
-        }
+        workout = collectionView.tag == 0 ? previousWorkouts[indexPath.item] : currentWorkouts[indexPath.item]
         
         cell.nameLabel.text = workout.name
         cell.dateLabel.text = dateFormatter.string(from: workout.dateCreated)
