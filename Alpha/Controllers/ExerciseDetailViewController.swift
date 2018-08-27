@@ -41,11 +41,12 @@ class ExerciseDetailViewController: UIViewController {
     }
     
     @IBAction func addSet(_ sender: UIBarButtonItem) {
-//        if let weight = exerciseInstance.sets.last?.weight,
-//            let reps = exerciseInstance.sets.last?.reps {
-//            exerciseInstance.sets.append((weight: weight, reps: reps))
-//        }
-        exerciseInstance.sets.append((weight: 0, reps: 0))
+        if let weight = exerciseInstance.sets.last?.weight,
+            let reps = exerciseInstance.sets.last?.reps {
+            exerciseInstance.sets.append((weight: weight, reps: reps))
+        } else {
+            exerciseInstance.sets.append((weight: 0, reps: 0))
+        }
         
         tableView.reloadData()
     }
@@ -84,14 +85,12 @@ class ExerciseDetailViewController: UIViewController {
         pickerViewToolBar = UIToolbar()
         pickerViewToolBar.barStyle = .default
         pickerViewToolBar.isTranslucent = true
-        pickerViewToolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
         pickerViewToolBar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePicker))
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(donePicker))
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePicker(sender:)))
 
-        pickerViewToolBar.setItems([doneButton, spacer, cancelButton], animated: true)
+        pickerViewToolBar.setItems([spacer, doneButton], animated: true)
         pickerViewToolBar.isUserInteractionEnabled = true
         
     }
@@ -102,15 +101,16 @@ class ExerciseDetailViewController: UIViewController {
         view.endEditing(true)
     }
     
-    // MARK: - Private Instance Methods
+    // MARK: - Instance Methods
 
-    @objc func donePicker() {
-        
+    @objc func donePicker(sender: UIBarButtonItem) {
+        activeTextField?.resignFirstResponder()
+        activeTextField = nil
     }
     
 }
 
-// MARK: - Extension CollectionViewDataSource
+// MARK: - Extension TableViewDataSource
 
 extension ExerciseDetailViewController: UITableViewDataSource {
     
@@ -177,6 +177,8 @@ extension ExerciseDetailViewController: UICollectionViewDelegate {
     
 }
 
+// MARK: - Extension PickerViewDataSoure
+
 extension ExerciseDetailViewController: UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -189,6 +191,8 @@ extension ExerciseDetailViewController: UIPickerViewDataSource {
     
 }
 
+// MARK: - Extension PickerViewDelegate
+
 extension ExerciseDetailViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -197,7 +201,6 @@ extension ExerciseDetailViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if let currentTextField = activeTextField {
-            
             if pickerView.tag == 1 {
                 currentTextField.text = "\(weightData[row]) kgs"
                 exerciseInstance.sets[currentTextField.tag].weight = weightData[row]
@@ -205,13 +208,12 @@ extension ExerciseDetailViewController: UIPickerViewDelegate {
                 currentTextField.text = "\(repsData[row]) reps"
                 exerciseInstance.sets[currentTextField.tag].reps = repsData[row]
             }
-            
-            currentTextField.resignFirstResponder()
-            activeTextField = nil
         }
     }
     
 }
+
+// MARK: - Extension TextFieldDelegate
 
 extension ExerciseDetailViewController: UITextFieldDelegate {
     
@@ -220,11 +222,5 @@ extension ExerciseDetailViewController: UITextFieldDelegate {
         
         return true
     }
-    
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        view.endEditing(true)
-//
-//        return true
-//    }
     
 }
