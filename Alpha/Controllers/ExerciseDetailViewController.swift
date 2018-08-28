@@ -25,7 +25,7 @@ class ExerciseDetailViewController: UIViewController {
     
     var activeTextField: UITextField?
     
-    var weightData = Array(1...250)
+    var weightData = Array(0...250)
     var repsData = Array(1...20)
     
     // MARK: - Outlets
@@ -141,13 +141,7 @@ extension ExerciseDetailViewController: UITableViewDataSource {
 
 // MARK: - Extension TableViewDelegate
 
-extension ExerciseDetailViewController: UITableViewDelegate {
-    
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "Set - Weight - Reps"
-//    }
-    
-}
+extension ExerciseDetailViewController: UITableViewDelegate {}
 
 // MARK: - Extension CollectionViewDataSource
 
@@ -170,11 +164,7 @@ extension ExerciseDetailViewController: UICollectionViewDataSource {
 
 // MARK: - Extension CollectionViewDelegate
 
-extension ExerciseDetailViewController: UICollectionViewDelegate {
-    
-    
-    
-}
+extension ExerciseDetailViewController: UICollectionViewDelegate {}
 
 // MARK: - Extension PickerViewDataSoure
 

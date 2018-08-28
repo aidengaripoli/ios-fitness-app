@@ -230,8 +230,8 @@
 				8FD1F55721251064000E6852 /* WorkoutExercisesViewController.swift */,
 				8FC673FD212D2E6A00834893 /* HomeViewController.swift */,
 				8F04D3DC21302EA400887201 /* ExerciseDetailViewController.swift */,
-				8F04D3E42132C2AB00887201 /* PickerViewDelegate.swift */,
 				8F04D3E82133A8E700887201 /* ProfileViewController.swift */,
+				8F04D3E42132C2AB00887201 /* PickerViewDelegate.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

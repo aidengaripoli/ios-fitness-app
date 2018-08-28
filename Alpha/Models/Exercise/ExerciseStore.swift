@@ -14,6 +14,8 @@ class ExerciseStore {
     
     init() {
         exercises = [
+            Exercise(name: "Test", muscles: [.lats, .abs, .hamstrings, .forearm, .chest]),
+            
             Exercise(name: "Bench Press", muscles: [.chest, .shoulders]),
             Exercise(name: "Pull Up", muscles: [.lats, .biceps]),
             Exercise(name: "Dip", muscles: [.chest, .triceps, .shoulders]),

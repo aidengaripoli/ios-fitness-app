@@ -28,9 +28,12 @@ class AlphaUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testHomeScene() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let app = XCUIApplication()
+        
+        app.buttons["startWorkoutButotn"].tap()
     }
     
 }
