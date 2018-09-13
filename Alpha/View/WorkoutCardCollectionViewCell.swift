@@ -14,4 +14,6 @@ class WorkoutCardCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var dateLabel: UILabel!
     
+    @IBOutlet var view: UIView!
+    
 }

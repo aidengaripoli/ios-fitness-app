@@ -37,7 +37,7 @@ class ExerciseDetailViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func startTimer(_ sender: UIBarButtonItem) {
-    
+        performSegue(withIdentifier: "PopOverSegue", sender: self)
     }
     
     @IBAction func addSet(_ sender: UIBarButtonItem) {
@@ -210,6 +210,25 @@ extension ExerciseDetailViewController: UITextFieldDelegate {
         activeTextField = textField
         
         return true
+    }
+    
+}
+
+//
+
+extension ExerciseDetailViewController: UIPopoverPresentationControllerDelegate {
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PopOverSegue" {
+            let popOver = segue.destination
+            popOver.modalPresentationStyle = .popover
+            popOver.popoverPresentationController?.delegate = self
+            popOver.preferredContentSize = CGSize(width: 250, height: 300)
+        }
     }
     
 }

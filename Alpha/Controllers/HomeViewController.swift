@@ -144,6 +144,10 @@ extension HomeViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let cell = cell as! WorkoutCardCollectionViewCell
+        
+        cell.view.layer.borderWidth = 1
+        cell.view.layer.borderColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1).cgColor
+        
         let workout: Workout
         
         workout = collectionView.tag == 0 ? previousWorkouts[indexPath.item] : currentWorkouts[indexPath.item]
