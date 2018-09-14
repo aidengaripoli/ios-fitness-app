@@ -51,10 +51,13 @@ class HomeViewController: UIViewController {
         
         for workout in workoutStore.workouts {
             // 604800 seconds = 7 days
-            if Date().addingTimeInterval(-604800) > workout.dateCreated {
-                previousWorkouts.append(workout)
-            } else {
+            let sevenDays = Date().addingTimeInterval(-604800)
+            let fourteenDays = Date().addingTimeInterval(-1209600)
+            
+            if workout.dateCreated >= sevenDays {
                 currentWorkouts.append(workout)
+            } else if workout.dateCreated <= sevenDays && workout.dateCreated >= fourteenDays {
+                previousWorkouts.append(workout)
             }
         }
         

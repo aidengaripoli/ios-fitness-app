@@ -33,14 +33,13 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBAction func save(_ sender: UIBarButtonItem) {
         // save the new workout
-        // need to validate the name label first however.
-        
-        // temp. assume not empty
-        newWorkout.name = workoutNameField.text!
-        
-        Model.shared.workoutStore.saveNewWorkout(workout: newWorkout)
-        
-        presentingViewController?.dismiss(animated: true, completion: nil)
+        if !(workoutNameField.text?.isEmpty)! {
+            newWorkout.name = workoutNameField.text!
+            
+            Model.shared.workoutStore.saveNewWorkout(workout: newWorkout)
+            
+            presentingViewController?.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
