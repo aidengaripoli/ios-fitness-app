@@ -66,6 +66,7 @@ class ExerciseDetailViewController: UIViewController {
         weightPickerView = UIPickerView()
         weightPickerView.tag = 1
         weightPickerView.backgroundColor = UIColor.white
+        weightPickerView.accessibilityIdentifier = "weightPickerView"
         
         weightPickerView.dataSource = self
         weightPickerView.delegate = self
@@ -74,6 +75,7 @@ class ExerciseDetailViewController: UIViewController {
         repsPickerView = UIPickerView()
         repsPickerView.tag = 2
         repsPickerView.backgroundColor = UIColor.white
+        repsPickerView.accessibilityIdentifier = "repsPickerView"
         
         repsPickerView.dataSource = self
         repsPickerView.delegate = self

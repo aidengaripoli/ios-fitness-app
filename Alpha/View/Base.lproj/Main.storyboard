@@ -25,6 +25,7 @@
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yD7-HU-cwf">
                                         <rect key="frame" x="0.0" y="0.0" width="398" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="nameField"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -78,6 +79,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4z-fg-M87">
                                 <rect key="frame" x="0.0" y="642" width="414" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <accessibility key="accessibilityConfiguration" identifier="selectExercises"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="E9i-U6-oNN"/>
                                 </constraints>
@@ -137,10 +139,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="57S-Pa-X83">
-                                <rect key="frame" x="0.0" y="64" width="414" height="628"/>
+                                <rect key="frame" x="0.0" y="63.999999999999993" width="414" height="628"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExerciseCell" rowHeight="68" id="bhf-0n-sBK" customClass="ExerciseCell" customModule="Alpha" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExerciseCell" rowHeight="68" id="bhf-0n-sBK" customClass="ExerciseCell" customModule="Alpha" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bhf-0n-sBK" id="QCr-Of-3vy">
@@ -170,6 +172,10 @@
                                                 <constraint firstItem="3zV-lF-g7d" firstAttribute="top" secondItem="QCr-Of-3vy" secondAttribute="topMargin" id="xwv-Ex-fWf"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="exercises">
+                                            <accessibilityTraits key="traits" button="YES" link="YES" selected="YES" staticText="YES" allowsDirectInteraction="YES"/>
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <connections>
                                             <outlet property="musclesLabel" destination="ZkG-hq-plN" id="VnU-JJ-SzY"/>
                                             <outlet property="nameLabel" destination="3zV-lF-g7d" id="vQ3-in-XHg"/>
@@ -213,6 +219,7 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workout Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mG9-nQ-1LZ">
                                             <rect key="frame" x="20" y="11" width="348" height="21"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="name"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -234,6 +241,10 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="xIA-OU-FkF" secondAttribute="bottom" id="ylI-Rw-shn"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration" identifier="workoutCell">
+                                    <accessibilityTraits key="traits" none="YES"/>
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                                 <connections>
                                     <outlet property="dateLabel" destination="xIA-OU-FkF" id="3tP-5b-fZi"/>
                                     <outlet property="nameLabel" destination="mG9-nQ-1LZ" id="C8s-We-hJk"/>
@@ -283,6 +294,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                                 <connections>
                                     <segue destination="8mV-SQ-1D3" kind="show" identifier="exerciseDetail" id="ETk-5L-bb2"/>
                                 </connections>
@@ -506,6 +520,7 @@
                                         <subviews>
                                             <imageView contentMode="scaleAspectFit" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="rpa-Ib-fBk">
                                                 <rect key="frame" x="58" y="57.999999999999986" width="266" height="197.66666666666663"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="profileImageView"/>
                                                 <gestureRecognizers/>
                                                 <connections>
                                                     <outletCollection property="gestureRecognizers" destination="3hV-TB-maJ" appends="YES" id="KRK-IP-FES"/>
@@ -551,18 +566,21 @@
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yOG-g4-mXG">
                                                         <rect key="frame" x="0.0" y="0.0" width="107.33333333333333" height="30"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="ageField"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pTt-Oa-B9f">
                                                         <rect key="frame" x="137.33333333333334" y="0.0" width="107.33333333333334" height="30"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="heightField"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YnI-Sf-gTw">
                                                         <rect key="frame" x="274.66666666666669" y="0.0" width="107.33333333333331" height="30"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="weightField"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -618,7 +636,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SJv-mF-uDy">
                                 <rect key="frame" x="0.0" y="637" width="414" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <accessibility key="accessibilityConfiguration" identifier="startWorkoutButton"/>
+                                <accessibility key="accessibilityConfiguration" identifier="startWorkoutButton" label="startWorkoutButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="koU-ax-Qs9"/>
                                 </constraints>
@@ -637,7 +655,7 @@
                                 <rect key="frame" x="0.0" y="100" width="414" height="537"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WorkoutCardTableViewCell" rowHeight="180" id="Evi-yP-g8T" customClass="WorkoutCardTableViewCell" customModule="Alpha" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WorkoutCardTableViewCell" rowHeight="180" id="Evi-yP-g8T" customClass="WorkoutCardTableViewCell" customModule="Alpha" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Evi-yP-g8T" id="dHw-8w-FDA">
@@ -809,7 +827,7 @@
         <image name="user" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UEy-Gw-Ntj"/>
+        <segue reference="RnO-gF-vbx"/>
         <segue reference="NDp-rx-6Ni"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -53,6 +53,8 @@ class WorkoutStore {
     // MARK: - Temporary Testing Methods
     
     func createDummyWorkouts(amount: Int) {
+        let workoutNames = ["Push", "Pull", "Legs", "Push", "Pull", "Legs"]
+        
         for i in 0...amount {
             let newWorkout: Workout
             
@@ -62,10 +64,31 @@ class WorkoutStore {
                 newWorkout = createNewWorkout()
             }
             
-            newWorkout.name = "Workout #\(i)"
-            newWorkout.exerciseInstances.append(
-                ExerciseInstance(exercise: Model.shared.exerciseStore.exercises[0])
-            )
+            newWorkout.name = workoutNames[i]
+            
+            switch i {
+            case 0:
+                fallthrough
+            case 3:
+                newWorkout.exerciseInstances.append(ExerciseInstance(exercise: Model.shared.exerciseStore.exercises[0]))
+                newWorkout.exerciseInstances.append(ExerciseInstance(exercise: Model.shared.exerciseStore.exercises[2]))
+                newWorkout.exerciseInstances.append(ExerciseInstance(exercise: Model.shared.exerciseStore.exercises[3]))
+                break
+            case 1:
+                fallthrough
+            case 4:
+                newWorkout.exerciseInstances.append(ExerciseInstance(exercise: Model.shared.exerciseStore.exercises[1]))
+                newWorkout.exerciseInstances.append(ExerciseInstance(exercise: Model.shared.exerciseStore.exercises[4]))
+                break
+            case 2:
+                fallthrough
+            case 5:
+                newWorkout.exerciseInstances.append(ExerciseInstance(exercise: Model.shared.exerciseStore.exercises[5]))
+                newWorkout.exerciseInstances.append(ExerciseInstance(exercise: Model.shared.exerciseStore.exercises[6]))
+                break
+            default:
+                break
+            }
             
             saveNewWorkout(workout: newWorkout)
         }

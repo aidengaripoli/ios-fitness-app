@@ -13,22 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-//    var workoutStore = WorkoutStore()
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         // make some dummy workouts to test with
         Model.shared.workoutStore.createDummyWorkouts(amount: 5)
-        
-//        let tabController = window!.rootViewController as! UITabBarController
-//
-//        let navigationController = tabController.childViewControllers[0] as! UINavigationController
-//        let workoutsController = navigationController.topViewController as! WorkoutsViewController
-//        workoutsController.workoutStore = workoutStore
-//
-//        let homeViewController = tabController.childViewControllers[1] as! HomeViewController
-//        homeViewController.workoutStore = workoutStore
         
         return true
     }

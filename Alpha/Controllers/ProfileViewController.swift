@@ -59,6 +59,7 @@ class ProfileViewController: UIViewController {
         agePickerView = UIPickerView()
         agePickerView.tag = 1
         agePickerView.backgroundColor = UIColor.white
+        agePickerView.accessibilityIdentifier = "agePickerView"
         
         agePickerView.dataSource = self
         agePickerView.delegate = self
@@ -67,6 +68,7 @@ class ProfileViewController: UIViewController {
         heightPickerView = UIPickerView()
         heightPickerView.tag = 2
         heightPickerView.backgroundColor = UIColor.white
+        heightPickerView.accessibilityIdentifier = "heightPickerView"
         
         heightPickerView.dataSource = self
         heightPickerView.delegate = self
@@ -75,6 +77,7 @@ class ProfileViewController: UIViewController {
         weightPickerView = UIPickerView()
         weightPickerView.tag = 3
         weightPickerView.backgroundColor = UIColor.white
+        weightPickerView.accessibilityIdentifier = "weightPickerView"
         
         weightPickerView.dataSource = self
         weightPickerView.delegate = self
