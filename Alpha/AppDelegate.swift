@@ -22,11 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navigationController = tabController.childViewControllers[1] as! UINavigationController
         let workoutsController = navigationController.topViewController as! WorkoutsViewController
-//        workoutsController.workoutStore = workoutStore
         workoutsController.model = model
         
         let homeViewController = tabController.childViewControllers[0] as! HomeViewController
-//        homeViewController.workoutStore = workoutStore
         homeViewController.model = model
         
         return true

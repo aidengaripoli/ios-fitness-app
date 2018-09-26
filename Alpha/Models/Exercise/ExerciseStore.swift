@@ -15,28 +15,16 @@ enum ExercisesResult {
 
 class ExerciseStore {
     
-    var exercises: [Exercise]
+    // MARK: - Properties
+    
+    var exercises = [Exercise]()
     
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
         return URLSession(configuration: config)
     }()
     
-    init() {
-        exercises = []
-        
-        
-        
-//        exercises = [
-//            Exercise(name: "Bench Press", muscles: [.chest, .shoulders]),
-//            Exercise(name: "Pull Up", muscles: [.lats, .biceps]),
-//            Exercise(name: "Dip", muscles: [.chest, .triceps, .shoulders]),
-//            Exercise(name: "Push Up", muscles: [.chest, .shoulders, .triceps]),
-//            Exercise(name: "Bodyweight Row", muscles: [.lats]),
-//            Exercise(name: "Squat", muscles: [.quads]),
-//            Exercise(name: "Calf Raises", muscles: [.calves])
-//        ]
-    }
+    // MARK: - Methods
     
     func fetchExercises(completion: @escaping (ExercisesResult) -> Void) {
         let url = AlphaAPI.exercisesURL
@@ -48,8 +36,6 @@ class ExerciseStore {
         }
         
         task.resume()
-        
-        print("done")
     }
     
     func processExercisesRequest(data: Data?, error: Error?) -> ExercisesResult {
