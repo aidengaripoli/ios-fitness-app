@@ -9,13 +9,9 @@
 import UIKit
 
 class Model {
-    
-    static let shared = Model()
-    
+
     var workoutStore = WorkoutStore()
-    
+
     var exerciseStore = ExerciseStore()
-    
-    private init() {}
     
 }

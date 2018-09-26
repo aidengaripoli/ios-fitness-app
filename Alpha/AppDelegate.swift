@@ -12,12 +12,22 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var model = Model()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        // make some dummy workouts to test with
-        Model.shared.workoutStore.createDummyWorkouts(amount: 5)
+        let tabController = window!.rootViewController as! UITabBarController
+        
+        let navigationController = tabController.childViewControllers[1] as! UINavigationController
+        let workoutsController = navigationController.topViewController as! WorkoutsViewController
+//        workoutsController.workoutStore = workoutStore
+        workoutsController.model = model
+        
+        let homeViewController = tabController.childViewControllers[0] as! HomeViewController
+//        homeViewController.workoutStore = workoutStore
+        homeViewController.model = model
         
         return true
     }

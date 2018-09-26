@@ -12,7 +12,7 @@ class WorkoutsViewController: UITableViewController {
     
     // MARK: - Properties
     
-    var workoutStore = Model.shared.workoutStore
+    var model: Model!
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -52,12 +52,13 @@ class WorkoutsViewController: UITableViewController {
         case "addWorkout":
             let navigationController = segue.destination as! UINavigationController
             let addWorkoutViewController = navigationController.viewControllers.first as! AddWorkoutViewController
-            addWorkoutViewController.newWorkout = workoutStore.createNewWorkout()
+            addWorkoutViewController.model = model
         case "showExercises":
             if let row = tableView.indexPathForSelectedRow?.row {
-                let workout = workoutStore.workouts[row]
+                let workout = model.workoutStore.workouts[row]
                 
                 let workoutExercisesViewController = segue.destination as! WorkoutExercisesViewController
+                workoutExercisesViewController.model = model
                 workoutExercisesViewController.workout = workout
             }
         default:
@@ -68,13 +69,13 @@ class WorkoutsViewController: UITableViewController {
     // MARK: - TableView Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return workoutStore.workouts.count
+        return model.workoutStore.workouts.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WorkoutCell", for: indexPath) as! WorkoutCell
         
-        let workout = workoutStore.workouts[indexPath.row]
+        let workout = model.workoutStore.workouts[indexPath.row]
         
         cell.nameLabel.text = workout.name
         cell.dateLabel.text = dateFormatter.string(from: workout.dateCreated)
@@ -84,7 +85,7 @@ class WorkoutsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let workout = workoutStore.workouts[indexPath.row]
+            let workout = model.workoutStore.workouts[indexPath.row]
             
             let title = "Delete \(workout.name)?"
             let message = "Are you sure you want to delete this workout?"
@@ -95,7 +96,7 @@ class WorkoutsViewController: UITableViewController {
             alertController.addAction(cancelAction)
             
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
-                self.workoutStore.removeWorkout(workout)
+                self.model.workoutStore.removeWorkout(workout)
                 
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
             }
@@ -106,7 +107,7 @@ class WorkoutsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        workoutStore.moveWorkout(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        model.workoutStore.moveWorkout(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
 }

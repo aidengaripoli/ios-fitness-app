@@ -14,6 +14,8 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var newWorkout: Workout!
     
+    var model: Model!
+    
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -36,7 +38,7 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
         if !(workoutNameField.text?.isEmpty)! {
             newWorkout.name = workoutNameField.text!
             
-            Model.shared.workoutStore.saveNewWorkout(workout: newWorkout)
+            model.workoutStore.saveNewWorkout(workout: newWorkout)
             
             presentingViewController?.dismiss(animated: true, completion: nil)
         }
@@ -54,6 +56,8 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        newWorkout = model.workoutStore.createNewWorkout()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -84,6 +88,7 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
         case "selectExercises":
             let selectExerciseViewController = segue.destination as! SelectExerciseViewController
             selectExerciseViewController.workout = newWorkout
+            selectExerciseViewController.model = model
         default:
             preconditionFailure("Unexpected segue identifier.")
         }

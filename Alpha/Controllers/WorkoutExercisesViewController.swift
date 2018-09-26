@@ -12,6 +12,8 @@ class WorkoutExercisesViewController: UITableViewController {
     
     // MARK: - Properties
     
+    var model: Model!
+    
     var workout: Workout! {
         didSet {
             navigationItem.title = workout.name
@@ -40,6 +42,7 @@ class WorkoutExercisesViewController: UITableViewController {
         case "editExercises":
             let selectExercisesViewController = segue.destination as! SelectExerciseViewController
             selectExercisesViewController.workout = workout
+            selectExercisesViewController.model = model
         case "exerciseDetail":
             if let row = tableView.indexPathForSelectedRow?.row {
                 let exerciseInstance = workout.exerciseInstances[row]

@@ -18,7 +18,7 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
     
     var workout: Workout!
     
-    var exerciseStore = Model.shared.exerciseStore
+    var model: Model!
     
     var filteredExercises = [Exercise]()
     
@@ -57,7 +57,7 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
             return filteredExercises.count
         }
         
-        return exerciseStore.exercises.count
+        return model.exerciseStore.exercises.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,7 +68,7 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         if isFiltering() {
             exercise = filteredExercises[indexPath.row]
         } else {
-            exercise = exerciseStore.exercises[indexPath.row]
+            exercise = model.exerciseStore.exercises[indexPath.row]
         }
         
         var musclesString = ""
@@ -93,7 +93,7 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         if isFiltering() {
             exercise = filteredExercises[indexPath.row]
         } else {
-            exercise = exerciseStore.exercises[indexPath.row]
+            exercise = model.exerciseStore.exercises[indexPath.row]
         }
         
         if let index = selectedIndexPaths.index(of: indexPath) {
@@ -130,7 +130,7 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         if isFiltering() {
             exercises = filteredExercises
         } else {
-            exercises = exerciseStore.exercises
+            exercises = model.exerciseStore.exercises
         }
         
         for instance in workout.exerciseInstances {
@@ -148,7 +148,7 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredExercises = exerciseStore.exercises.filter({ (exercise) -> Bool in
+        filteredExercises = model.exerciseStore.exercises.filter({ (exercise) -> Bool in
             var doesMuscleMatch = scope == "All"
             
             for muscle in exercise.muscles {

@@ -12,7 +12,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Properties
     
-    var workoutStore = Model.shared.workoutStore
+    var model: Model!
     
     var previousWorkouts: [Workout] = []
     
@@ -39,6 +39,16 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        model.exerciseStore.fetchExercises { (exercisesResult) in
+            switch exercisesResult {
+            case let .success(exercises):
+                print("Successfully found: \(exercises.count) exercises.")
+                self.model.exerciseStore.exercises = exercises
+            case let .failure(error):
+                print("Error fetching exercises: \(error)")
+            }
+        }
+        
         // temp
         tableView.rowHeight = 200
     }
@@ -49,7 +59,7 @@ class HomeViewController: UIViewController {
         previousWorkouts.removeAll()
         currentWorkouts.removeAll()
         
-        for workout in workoutStore.workouts {
+        for workout in model.workoutStore.workouts {
             // 604800 seconds = 7 days
             let sevenDays = Date().addingTimeInterval(-604800)
             let fourteenDays = Date().addingTimeInterval(-1209600)
@@ -71,7 +81,7 @@ class HomeViewController: UIViewController {
         case "addWorkout":
             let navigationController = segue.destination as! UINavigationController
             let addWorkoutViewController = navigationController.viewControllers.first as! AddWorkoutViewController
-            addWorkoutViewController.newWorkout = workoutStore.createNewWorkout()
+            addWorkoutViewController.model = model
         default:
             preconditionFailure("Unexpected Segue Identifier")
         }
