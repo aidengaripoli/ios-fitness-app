@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Muscle: String {
+enum MuscleEnum: String {
     
     case neck, traps, shoulders, chest, biceps, forearm, abs, quads, calves,
         triceps, lats, middleBack, lowerBack, glutes, hamstrings
