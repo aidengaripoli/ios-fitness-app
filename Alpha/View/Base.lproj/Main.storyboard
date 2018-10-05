@@ -139,7 +139,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="57S-Pa-X83">
-                                <rect key="frame" x="0.0" y="63.999999999999993" width="414" height="628"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExerciseCell" rowHeight="68" id="bhf-0n-sBK" customClass="ExerciseCell" customModule="Alpha" customModuleProvider="target">
@@ -827,7 +827,7 @@
         <image name="user" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RnO-gF-vbx"/>
-        <segue reference="NDp-rx-6Ni"/>
+        <segue reference="UEy-Gw-Ntj"/>
+        <segue reference="K4I-5H-gQt"/>
     </inferredMetricsTieBreakers>
 </document>

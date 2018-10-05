@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -15,13 +16,18 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet var tableView: UITableView!
     
     // MARK: - Properties
+
+    var exercises =  [Exercise]()
     
-    var workout: Workout!
+    var workout: Workout! {
+        didSet {
+            navigationItem.title = workout.name
+        }
+    }
     
     var model: Model!
     
     var filteredExercises = [Exercise]()
-    
     var selectedIndexPaths = [IndexPath]()
     
     let searchController = UISearchController(searchResultsController: nil)
@@ -37,7 +43,6 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-        // TODO: figure out a wait to allow ALL muscles to be used as scopes
         searchController.searchBar.scopeButtonTitles = ["All", "Chest", "Shoulders", "Lats", "Biceps"]
         searchController.searchBar.delegate = self
         
@@ -47,7 +52,18 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 68
         
-        updateSelectedExercises()
+        // fetch from all exercises core data, then load the array into the data source
+        // for the table view. then do a network fetch request to get all exercises from
+        // the api, save the new exercises in core data if they dont exist, re fetch all
+        // exercises and reload the tableview.
+        
+        updateDataSource() // fetches from COREDATA and loads into datasource array
+        
+        // networking fetch
+        model.exerciseStore.requestExercises { (exercisesResult) in
+            // fetches from core data, now with possibly more data, and reloads the tableview
+            self.updateDataSource()
+        }
     }
     
     // MARK: - Tableview
@@ -57,7 +73,7 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
             return filteredExercises.count
         }
         
-        return model.exerciseStore.exercises.count
+        return exercises.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,15 +84,26 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         if isFiltering() {
             exercise = filteredExercises[indexPath.row]
         } else {
-            exercise = model.exerciseStore.exercises[indexPath.row]
+            exercise = exercises[indexPath.row]
         }
         
         var musclesString = ""
         
-        for (index, muscle) in exercise.muscles.enumerated() {
-            musclesString.append(muscle.rawValue.capitalized)
+//        for (index, muscle) in exercise.muscles.enumerated() {
+//            musclesString.append(muscle.rawValue.capitalized)
+//
+//            if index != exercise.muscles.count - 1 {
+//                musclesString.append(", ")
+//            }
+//        }
+        
+        // convert muscles to array to display them
+        let muscles = exercise.muscles?.allObjects as! Array<Muscle>
+        
+        for (index, muscle) in muscles.enumerated() {
+            musclesString.append(muscle.name!.capitalized)
             
-            if index != exercise.muscles.count - 1 {
+            if index != (exercise.muscles?.count)! - 1 {
                 musclesString.append(", ")
             }
         }
@@ -93,20 +120,51 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         if isFiltering() {
             exercise = filteredExercises[indexPath.row]
         } else {
-            exercise = model.exerciseStore.exercises[indexPath.row]
+            exercise = exercises[indexPath.row]
         }
         
         if let index = selectedIndexPaths.index(of: indexPath) {
             selectedIndexPaths.remove(at: index)
-            for instance in workout.exerciseInstances {
+            
+            for instance in workout.exerciseInstances as! Set<ExerciseInstance> {
                 if instance.exercise === exercise {
-                    workout.exerciseInstances.remove(at: workout.exerciseInstances.index(of: instance)!)
+                    workout.removeFromExerciseInstances(instance)
+                    
+                    model.exerciseStore.persistantContainer.viewContext.delete(instance)
+                    
+                    do {
+                        try model.exerciseStore.persistantContainer.viewContext.save()
+                    } catch {
+                        print("ERROR: Could not save to Core Data: \(error)")
+                    }
                 }
             }
         } else {
             selectedIndexPaths.append(indexPath)
-            let instance = ExerciseInstance(exercise: exercise)
-            workout.exerciseInstances.append(instance)
+            
+            // create exercise instance
+            let instance = NSEntityDescription.insertNewObject(forEntityName: "ExerciseInstance", into: model.exerciseStore.persistantContainer.viewContext) as! ExerciseInstance
+            
+            // associate it with the selected exercise
+            instance.exercise = exercise
+            
+            // create a new set
+            let initialSet = NSEntityDescription.insertNewObject(forEntityName: "ExerciseSet", into: model.exerciseStore.persistantContainer.viewContext) as! ExerciseSet
+            
+            initialSet.weight = 0
+            initialSet.reps = 0
+            
+            // associate it with the instance
+            initialSet.exerciseInstance = instance
+            
+            // associate the instance with the workout
+            workout.addToExerciseInstances(instance)
+            
+            do {
+                try model.exerciseStore.persistantContainer.viewContext.save()
+            } catch {
+                print("ERROR: Could not save to Core Data: \(error)")
+            }
         }
         
         tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -122,6 +180,21 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
     
     // MARK: - Private Instance Methods
     
+    private func updateDataSource() {
+        // fetch all exercise from core data and update the exercise array
+        model.exerciseStore.fetchAllExercises { (result) in
+            switch result {
+            case let .success(exercises):
+                self.exercises = exercises
+            case .failure:
+                self.exercises.removeAll()
+            }
+            
+            // update the exercises that the workout has selected
+            self.updateSelectedExercises()
+        }
+    }
+    
     func updateSelectedExercises() {
         selectedIndexPaths.removeAll()
         
@@ -130,17 +203,17 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         if isFiltering() {
             exercises = filteredExercises
         } else {
-            exercises = model.exerciseStore.exercises
+            exercises = self.exercises
         }
         
-        for instance in workout.exerciseInstances {
-            if let index = exercises.index(of: instance.exercise) {
+        for instance in workout.exerciseInstances as! Set<ExerciseInstance> {
+            if let index = exercises.index(of: instance.exercise!) {
                 let indexPath = IndexPath(row: index, section: 0)
                 selectedIndexPaths.append(indexPath)
             }
         }
         
-        tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+        self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -148,11 +221,14 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredExercises = model.exerciseStore.exercises.filter({ (exercise) -> Bool in
+        filteredExercises = exercises.filter({ (exercise) -> Bool in
             var doesMuscleMatch = scope == "All"
             
-            for muscle in exercise.muscles {
-                if muscle.rawValue == scope.lowercased() {
+            // convert muscles to array to display them
+            let muscles = exercise.muscles?.allObjects as! Array<Muscle>
+            
+            for muscle in muscles {
+                if muscle.name == scope.lowercased() {
                     doesMuscleMatch = true
                 }
             }
@@ -161,7 +237,7 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
                 return doesMuscleMatch
             }
             
-            return doesMuscleMatch && exercise.name.lowercased().contains(searchText.lowercased())
+            return doesMuscleMatch && exercise.name!.lowercased().contains(searchText.lowercased())
         })
         
         tableView.reloadData()

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 enum ExercisesResult {
     case success([Exercise])
@@ -17,33 +18,83 @@ class ExerciseStore {
     
     // MARK: - Properties
     
-    var exercises = [Exercise]()
+//    var exercises = [Exercise]()
     
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
         return URLSession(configuration: config)
     }()
     
-    // MARK: - Methods
+    let persistantContainer: NSPersistentContainer!
     
-    func fetchExercises(completion: @escaping (ExercisesResult) -> Void) {
-        let url = AlphaAPI.exercisesURL
-        let request = URLRequest(url: url)
-        
-        let task = session.dataTask(with: request) { (data, response, error) in
-            let result = self.processExercisesRequest(data: data, error: error)
-            completion(result)
-        }
-        
-        task.resume()
+    // MARK: - Init
+    
+    init(container: NSPersistentContainer) {
+        self.persistantContainer = container
     }
     
-    func processExercisesRequest(data: Data?, error: Error?) -> ExercisesResult {
-        guard let jsonData = data else {
-            return .failure(error!)
-        }
+    // MARK: - Methods
+    
+    func fetchAllExercises(completion: @escaping (ExercisesResult) -> Void) {
+        let fetchRequest: NSFetchRequest<Exercise> = Exercise.fetchRequest()
+        let sortByName = NSSortDescriptor(key: #keyPath(Exercise.name), ascending: true)
         
-        return AlphaAPI.exercises(fromJSON: jsonData)
+        fetchRequest.sortDescriptors = [sortByName]
+        
+        let context = persistantContainer.viewContext
+        
+        context.perform {
+            do {
+                let allExercises = try context.fetch(fetchRequest)
+                completion(.success(allExercises))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func requestExercises(completion: @escaping (ExercisesResult) -> Void) {
+        let url = AlphaAPI.exercisesURL
+        let request = URLRequest(url: url)
+
+        let task = session.dataTask(with: request) { (data, response, error) in
+            self.processExercisesRequest(data: data, error: error, completion: { (result) in
+                OperationQueue.main.addOperation {
+                    completion(result)
+                }
+            })
+        }
+
+        task.resume()
+    }
+
+    func processExercisesRequest(data: Data?, error: Error?, completion: @escaping (ExercisesResult) -> Void) {
+        guard let jsonData = data else {
+            completion(.failure(error!))
+            return
+        }
+
+        persistantContainer.performBackgroundTask { (context) in
+            let result = AlphaAPI.exercises(fromJSON: jsonData, into: context)
+            
+            do {
+                try context.save()
+            } catch {
+                print("Error saving to Core Data: \(error)")
+                completion(.failure(error))
+                return
+            }
+            
+            switch result {
+            case let .success(exercises):
+                let exerciseIDs = exercises.map { return $0.objectID }
+                let viewContext = self.persistantContainer.viewContext
+                let viewContextExercises = exerciseIDs.map { return viewContext.object(with: $0) } as! [Exercise]
+                completion(.success(viewContextExercises))
+            case .failure:
+                completion(result)
+            }
+        }
     }
     
 }

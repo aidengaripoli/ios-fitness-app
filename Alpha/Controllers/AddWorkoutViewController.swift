@@ -38,13 +38,15 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
         if !(workoutNameField.text?.isEmpty)! {
             newWorkout.name = workoutNameField.text!
             
-            model.workoutStore.saveNewWorkout(workout: newWorkout)
+            model.workoutStore.save()
             
             presentingViewController?.dismiss(animated: true, completion: nil)
         }
     }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
+        model.workoutStore.removeWorkout(newWorkout)
+        
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
@@ -63,14 +65,10 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.dataSource = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
- 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        dateLabel.text = dateFormatter.string(from: newWorkout.dateCreated)
+        dateLabel.text = dateFormatter.string(from: newWorkout.dateCreated! as Date)
         
         tableView.reloadData()
     }
@@ -101,15 +99,17 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newWorkout.exerciseInstances.count
+        return newWorkout.exerciseInstances!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath)
         
-        let exercise = newWorkout.exerciseInstances[indexPath.row].exercise
+        let exerciseInstancesArray = newWorkout.exerciseInstances?.allObjects as! [ExerciseInstance]
         
-        cell.textLabel?.text = exercise.name
+        let exercise = exerciseInstancesArray[indexPath.row].exercise
+        
+        cell.textLabel?.text = exercise?.name
         
         return cell
     }

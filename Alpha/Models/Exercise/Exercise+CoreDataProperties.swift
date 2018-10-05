@@ -2,7 +2,7 @@
 //  Exercise+CoreDataProperties.swift
 //  Alpha
 //
-//  Created by Aiden Garipoli on 3/10/18.
+//  Created by Aiden Garipoli on 5/10/18.
 //  Copyright © 2018 Aiden Garipoli. All rights reserved.
 //
 //
@@ -18,6 +18,7 @@ extension Exercise {
     }
 
     @NSManaged public var name: String?
+    @NSManaged public var exerciseID: String?
     @NSManaged public var exerciseInstances: NSSet?
     @NSManaged public var muscles: NSSet?
 

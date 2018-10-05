@@ -24,6 +24,9 @@ class ProfileViewController: UIViewController {
     var heightData = Array(50...200)
     var weightData = Array(30...300)
     
+    var profileDetails = ProfileDetails()
+    var imageStore: ImageStore!
+    
     // MARK: - Outlets
     
     @IBOutlet var imageView: UIImageView!
@@ -96,14 +99,21 @@ class ProfileViewController: UIViewController {
         ageField.delegate = self
         ageField.inputView = agePickerView
         ageField.inputAccessoryView = pickerViewToolBar
+        ageField.text = "\(profileDetails.get(key: "age")!)"
         
         heightField.delegate = self
         heightField.inputView = heightPickerView
         heightField.inputAccessoryView = pickerViewToolBar
+        heightField.text = "\(profileDetails.get(key: "height")!) cms"
         
         weightField.delegate = self
         weightField.inputView = weightPickerView
         weightField.inputAccessoryView = pickerViewToolBar
+        weightField.text = "\(profileDetails.get(key: "weight")!) kgs"
+        
+        if let image = imageStore.image(forKey: "profile") {
+            imageView.image = image
+        }
     }
     
     // MARK: - Instance Methods
@@ -120,6 +130,7 @@ extension ProfileViewController: UINavigationControllerDelegate, UIImagePickerCo
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         imageView.image = image
+        imageStore.setImage(image, forKey: "profile")
         
         dismiss(animated: true, completion: nil)
     }
@@ -157,10 +168,13 @@ extension ProfileViewController: UIPickerViewDelegate {
         switch pickerView.tag {
         case 1:
             return "\(ageData[row])"
+//            return profileDetails.get(key: "age") as? String
         case 2:
             return "\(heightData[row]) cms"
+//            return profileDetails.get(key: "height") as? String
         case 3:
             return "\(weightData[row]) kgs"
+//            return profileDetails.get(key: "weight") as? String
         default:
             return ""
         }
@@ -171,10 +185,13 @@ extension ProfileViewController: UIPickerViewDelegate {
             switch pickerView.tag {
             case 1:
                 currentTextField.text = "\(ageData[row])"
+                profileDetails.update(key: "age", value: ageData[row])
             case 2:
                 currentTextField.text = "\(heightData[row]) cms"
+                profileDetails.update(key: "height", value: heightData[row])
             case 3:
                 currentTextField.text = "\(weightData[row]) kgs"
+                profileDetails.update(key: "weight", value: weightData[row])
             default:
                 currentTextField.text = ""
             }

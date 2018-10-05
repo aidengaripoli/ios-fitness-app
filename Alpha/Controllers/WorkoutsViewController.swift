@@ -35,8 +35,6 @@ class WorkoutsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(#function)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,7 +76,7 @@ class WorkoutsViewController: UITableViewController {
         let workout = model.workoutStore.workouts[indexPath.row]
         
         cell.nameLabel.text = workout.name
-        cell.dateLabel.text = dateFormatter.string(from: workout.dateCreated)
+        cell.dateLabel.text = dateFormatter.string(from: workout.dateCreated! as Date)
         
         return cell
     }
@@ -87,7 +85,7 @@ class WorkoutsViewController: UITableViewController {
         if editingStyle == .delete {
             let workout = model.workoutStore.workouts[indexPath.row]
             
-            let title = "Delete \(workout.name)?"
+            let title = "Delete \(workout.name!)?"
             let message = "Are you sure you want to delete this workout?"
             
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)

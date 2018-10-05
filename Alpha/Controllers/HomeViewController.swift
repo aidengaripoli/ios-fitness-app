@@ -15,8 +15,7 @@ class HomeViewController: UIViewController {
     var model: Model!
     
     var previousWorkouts: [Workout] = []
-    
-    var currentWorkouts: [Workout] = []
+    var currentWorkouts = [Workout]()
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -39,22 +38,12 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        model.exerciseStore.fetchExercises { (exercisesResult) in
-            switch exercisesResult {
-            case let .success(exercises):
-                print("Successfully found: \(exercises.count) exercises.")
-                self.model.exerciseStore.exercises = exercises
-            case let .failure(error):
-                print("Error fetching exercises: \(error)")
-            }
-        }
-        
         // temp
         tableView.rowHeight = 200
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         previousWorkouts.removeAll()
         currentWorkouts.removeAll()
@@ -64,9 +53,11 @@ class HomeViewController: UIViewController {
             let sevenDays = Date().addingTimeInterval(-604800)
             let fourteenDays = Date().addingTimeInterval(-1209600)
             
-            if workout.dateCreated >= sevenDays {
+            let workoutDate = workout.dateCreated! as Date
+            
+            if workoutDate >= sevenDays {
                 currentWorkouts.append(workout)
-            } else if workout.dateCreated <= sevenDays && workout.dateCreated >= fourteenDays {
+            } else if workoutDate <= sevenDays && workoutDate >= fourteenDays {
                 previousWorkouts.append(workout)
             }
         }
@@ -166,7 +157,7 @@ extension HomeViewController: UICollectionViewDelegate {
         workout = collectionView.tag == 0 ? previousWorkouts[indexPath.item] : currentWorkouts[indexPath.item]
         
         cell.nameLabel.text = workout.name
-        cell.dateLabel.text = dateFormatter.string(from: workout.dateCreated)
+        cell.dateLabel.text = dateFormatter.string(from: workout.dateCreated! as Date)
     }
     
 }

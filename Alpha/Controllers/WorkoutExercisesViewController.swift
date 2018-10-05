@@ -45,10 +45,13 @@ class WorkoutExercisesViewController: UITableViewController {
             selectExercisesViewController.model = model
         case "exerciseDetail":
             if let row = tableView.indexPathForSelectedRow?.row {
-                let exerciseInstance = workout.exerciseInstances[row]
+                let exerciseInstanceArray = workout.exerciseInstances?.allObjects as! [ExerciseInstance]
+                
+                let exerciseInstance = exerciseInstanceArray[row]
                 
                 let exerciseDetailViewController = segue.destination as! ExerciseDetailViewController
                 exerciseDetailViewController.exerciseInstance = exerciseInstance
+                exerciseDetailViewController.model = model
             }
         default:
             preconditionFailure("")
@@ -58,15 +61,17 @@ class WorkoutExercisesViewController: UITableViewController {
     // MARK: - TableView
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return workout.exerciseInstances.count
+        return (workout.exerciseInstances?.count)!
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let exercise = workout.exerciseInstances[indexPath.row].exercise
+        let exerciseInstanceArray = workout.exerciseInstances?.allObjects as! [ExerciseInstance]
         
-        cell.textLabel?.text = exercise.name
+        let exercise = exerciseInstanceArray[indexPath.row].exercise
+        
+        cell.textLabel?.text = exercise?.name
         
         return cell
     }

@@ -7,16 +7,30 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-    var model = Model()
 
+    let persistantContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Alpha")
+        container.loadPersistentStores(completionHandler: { (description, error) in
+            if let error = error {
+                print("Error setting up Core Data (\(error))")
+            }
+        })
+        return container
+    }()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let workoutStore = WorkoutStore(container: persistantContainer)
+        let exerciseStore = ExerciseStore(container: persistantContainer)
+        
+        let model = Model(workoutStore: workoutStore, exerciseStore: exerciseStore)
         
         let tabController = window!.rootViewController as! UITabBarController
         
@@ -26,6 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let homeViewController = tabController.childViewControllers[0] as! HomeViewController
         homeViewController.model = model
+        
+        let profileViewController = tabController.childViewControllers[2] as! ProfileViewController
+        profileViewController.imageStore = ImageStore()
         
         return true
     }

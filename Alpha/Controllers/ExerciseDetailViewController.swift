@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ExerciseDetailViewController: UIViewController {
     
@@ -14,9 +15,11 @@ class ExerciseDetailViewController: UIViewController {
 
     var exerciseInstance: ExerciseInstance! {
         didSet {
-            navigationItem.title = exerciseInstance.exercise.name
+            navigationItem.title = exerciseInstance.exercise?.name
         }
     }
+    
+    var model: Model!
     
     var weightPickerView: UIPickerView!
     var repsPickerView: UIPickerView!
@@ -37,12 +40,7 @@ class ExerciseDetailViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func addSet(_ sender: UIBarButtonItem) {
-        if let weight = exerciseInstance.sets.last?.weight,
-            let reps = exerciseInstance.sets.last?.reps {
-            exerciseInstance.sets.append((weight: weight, reps: reps))
-        } else {
-            exerciseInstance.sets.append((weight: 0, reps: 0))
-        }
+        model.workoutStore.createSet(weight: 0, reps: 0, exerciseInstance: exerciseInstance)
         
         tableView.reloadData()
     }
@@ -112,7 +110,7 @@ class ExerciseDetailViewController: UIViewController {
 extension ExerciseDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return exerciseInstance.sets.count
+        return exerciseInstance.sets!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -128,9 +126,12 @@ extension ExerciseDetailViewController: UITableViewDataSource {
         cell.repsField.inputView = repsPickerView
         cell.repsField.inputAccessoryView = pickerViewToolBar
         
+        let setsArray = exerciseInstance.sets?.allObjects as! [ExerciseSet]
+        
+        
         cell.setLabel.text = "\(indexPath.row + 1)"
-        cell.weightField.text = "\(exerciseInstance.sets[indexPath.row].weight) kgs"
-        cell.repsField.text = "\(exerciseInstance.sets[indexPath.row].reps) reps"
+        cell.weightField.text = "\(setsArray[indexPath.row].weight) kgs"
+        cell.repsField.text = "\(setsArray[indexPath.row].reps) reps"
         
         return cell
     }
@@ -146,14 +147,17 @@ extension ExerciseDetailViewController: UITableViewDelegate {}
 extension ExerciseDetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return exerciseInstance.exercise.muscles.count
+        return exerciseInstance.exercise!.muscles!.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExerciseMuscleCell", for: indexPath) as! ExerciseMuscleCell
     
-        cell.nameLabel.text = exerciseInstance.exercise.muscles[indexPath.row].rawValue.capitalized
+        // convert relationship to array and display mucles
+        let muscles = exerciseInstance.exercise?.muscles?.allObjects as! [Muscle]
+        
+        cell.nameLabel.text = muscles[indexPath.row].name?.capitalized
         
         return cell
     }
@@ -188,12 +192,19 @@ extension ExerciseDetailViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if let currentTextField = activeTextField {
+            let setsArray = exerciseInstance.sets?.allObjects as! [ExerciseSet]
+            
             if pickerView.tag == 1 {
                 currentTextField.text = "\(weightData[row]) kgs"
-                exerciseInstance.sets[currentTextField.tag].weight = weightData[row]
+                
+                setsArray[currentTextField.tag].weight = Int32(weightData[row])
+
+                model.workoutStore.save()
             } else {
                 currentTextField.text = "\(repsData[row]) reps"
-                exerciseInstance.sets[currentTextField.tag].reps = repsData[row]
+                setsArray[currentTextField.tag].reps = Int32(repsData[row])
+                
+                model.workoutStore.save()
             }
         }
     }

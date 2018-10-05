@@ -7,11 +7,19 @@
 //
 
 import UIKit
+import CoreData
 
 class Model {
 
-    var workoutStore = WorkoutStore()
+    var workoutStore: WorkoutStore!
 
-    var exerciseStore = ExerciseStore()
+    var exerciseStore: ExerciseStore!
+    
+    init(workoutStore: WorkoutStore, exerciseStore: ExerciseStore) {
+        self.workoutStore = workoutStore
+        self.exerciseStore = exerciseStore
+
+        self.workoutStore.fetchAllWorkouts()
+    }
     
 }
