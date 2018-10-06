@@ -115,6 +115,30 @@ class WorkoutStore {
         save()
     }
     
+    func createExerciseInstance(exercise: Exercise, workout: Workout) {
+        // create exercise instance
+        let instance = NSEntityDescription.insertNewObject(forEntityName: "ExerciseInstance", into: persistantContainer.viewContext) as! ExerciseInstance
+        
+        // associate it with the selected exercise and workout
+        instance.exercise = exercise
+        instance.workout = workout
+        
+        // create a new set
+        let initialSet = NSEntityDescription.insertNewObject(forEntityName: "ExerciseSet", into: persistantContainer.viewContext) as! ExerciseSet
+        
+        initialSet.weight = 0
+        initialSet.reps = 0
+        
+        // associate it with the instance
+        initialSet.exerciseInstance = instance
+    }
+    
+    func deleteExerciseInstance(exerciseInstance: ExerciseInstance) {
+        persistantContainer.viewContext.delete(exerciseInstance)
+        
+        save()
+    }
+    
     func save() {
         do {
             try persistantContainer.viewContext.save()

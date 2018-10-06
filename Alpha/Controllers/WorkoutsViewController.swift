@@ -85,7 +85,7 @@ class WorkoutsViewController: UITableViewController {
         if editingStyle == .delete {
             let workout = model.workoutStore.workouts[indexPath.row]
             
-            let title = "Delete \(workout.name!)?"
+            let title = "Delete \(workout.name ?? "")?"
             let message = "Are you sure you want to delete this workout?"
             
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)

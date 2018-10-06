@@ -31,11 +31,17 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
     var selectedIndexPaths = [IndexPath]()
     
     let searchController = UISearchController(searchResultsController: nil)
+    let segment: UISegmentedControl = UISegmentedControl(items: ["All", "Isolation", "Compound"])
     
     // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        segment.sizeToFit()
+        segment.selectedSegmentIndex = 0;
+        self.navigationItem.titleView = segment
+        segment.addTarget(self, action: #selector(requestExercises(sender:)), for: .valueChanged)
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -48,7 +54,7 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         
         tableView.dataSource = self
         tableView.delegate = self
-        
+
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 68
         
@@ -58,11 +64,14 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         // exercises and reload the tableview.
         
         updateDataSource() // fetches from COREDATA and loads into datasource array
-        
+
         // networking fetch
-        model.exerciseStore.requestExercises { (exercisesResult) in
+        showFetchingIndicatorAlert()
+        
+        model.exerciseStore.requestAllExercises { (exercisesResult) in
             // fetches from core data, now with possibly more data, and reloads the tableview
             self.updateDataSource()
+            self.dismiss(animated: false, completion: nil)
         }
     }
     
@@ -88,14 +97,6 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         var musclesString = ""
-        
-//        for (index, muscle) in exercise.muscles.enumerated() {
-//            musclesString.append(muscle.rawValue.capitalized)
-//
-//            if index != exercise.muscles.count - 1 {
-//                musclesString.append(", ")
-//            }
-//        }
         
         // convert muscles to array to display them
         let muscles = exercise.muscles?.allObjects as! Array<Muscle>
@@ -130,41 +131,13 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
                 if instance.exercise === exercise {
                     workout.removeFromExerciseInstances(instance)
                     
-                    model.exerciseStore.persistantContainer.viewContext.delete(instance)
-                    
-                    do {
-                        try model.exerciseStore.persistantContainer.viewContext.save()
-                    } catch {
-                        print("ERROR: Could not save to Core Data: \(error)")
-                    }
+                    model.workoutStore.deleteExerciseInstance(exerciseInstance: instance)
                 }
             }
         } else {
             selectedIndexPaths.append(indexPath)
             
-            // create exercise instance
-            let instance = NSEntityDescription.insertNewObject(forEntityName: "ExerciseInstance", into: model.exerciseStore.persistantContainer.viewContext) as! ExerciseInstance
-            
-            // associate it with the selected exercise
-            instance.exercise = exercise
-            
-            // create a new set
-            let initialSet = NSEntityDescription.insertNewObject(forEntityName: "ExerciseSet", into: model.exerciseStore.persistantContainer.viewContext) as! ExerciseSet
-            
-            initialSet.weight = 0
-            initialSet.reps = 0
-            
-            // associate it with the instance
-            initialSet.exerciseInstance = instance
-            
-            // associate the instance with the workout
-            workout.addToExerciseInstances(instance)
-            
-            do {
-                try model.exerciseStore.persistantContainer.viewContext.save()
-            } catch {
-                print("ERROR: Could not save to Core Data: \(error)")
-            }
+            model.workoutStore.createExerciseInstance(exercise: exercise, workout: workout)
         }
         
         tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -182,16 +155,21 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
     
     private func updateDataSource() {
         // fetch all exercise from core data and update the exercise array
-        model.exerciseStore.fetchAllExercises { (result) in
-            switch result {
-            case let .success(exercises):
-                self.exercises = exercises
-            case .failure:
-                self.exercises.removeAll()
-            }
+        let segmentSelection = segment.titleForSegment(at: segment.selectedSegmentIndex)
+        
+        if let mechanics = Mechanics(rawValue: segmentSelection!.lowercased()) {
             
-            // update the exercises that the workout has selected
-            self.updateSelectedExercises()
+            model.exerciseStore.fetchExercises (mechanics: mechanics) { (result) in
+                switch result {
+                case let .success(exercises):
+                    self.exercises = exercises
+                case .failure:
+                    self.exercises.removeAll()
+                }
+                
+                // update the exercises that the workout has selected
+                self.updateSelectedExercises()
+            }
         }
     }
     
@@ -247,6 +225,42 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
         
         return searchController.isActive && (!searchBarIsEmpty() || searchBarScopeIsFiltering)
+    }
+    
+    @objc func requestExercises(sender: UISegmentedControl) {
+        showFetchingIndicatorAlert()
+        
+        switch sender.selectedSegmentIndex {
+        case 0:
+            model.exerciseStore.requestAllExercises { (exercisesResult) in
+                self.updateDataSource()
+                self.dismiss(animated: true, completion: nil)
+            }
+        case 1:
+            model.exerciseStore.requestIsolationExercises { (exercisesResult) in
+                self.updateDataSource()
+                self.dismiss(animated: false, completion: nil)
+            }
+        case 2:
+            model.exerciseStore.requestCompoundExercises { (exercisesResult) in
+                self.updateDataSource()
+                self.dismiss(animated: false, completion: nil)
+            }
+        default:
+            break
+        }
+    }
+    
+    func showFetchingIndicatorAlert() {
+        let alert = UIAlertController(title: nil, message: "Fetching...", preferredStyle: .alert)
+        
+        let fetchingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        fetchingIndicator.hidesWhenStopped = true
+        fetchingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        fetchingIndicator.startAnimating()
+        
+        alert.view.addSubview(fetchingIndicator)
+        present(alert, animated: true, completion: nil)
     }
     
 }

@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Exercise" representedClassName="Exercise" syncable="YES">
         <attribute name="exerciseID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mechanics" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="exerciseInstances" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseInstance" inverseName="exercise" inverseEntity="ExerciseInstance" syncable="YES"/>
         <relationship name="muscles" toMany="YES" deletionRule="Nullify" destinationEntity="Muscle" inverseName="exercise" inverseEntity="Muscle" syncable="YES"/>
@@ -25,10 +26,10 @@
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="workoutID" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="exerciseInstances" toMany="YES" deletionRule="Cascade" destinationEntity="ExerciseInstance" inverseName="workout" inverseEntity="ExerciseInstance" syncable="YES"/>
+        <relationship name="exerciseInstances" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ExerciseInstance" inverseName="workout" inverseEntity="ExerciseInstance" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Exercise" positionX="36" positionY="81" width="128" height="105"/>
+        <element name="Exercise" positionX="36" positionY="81" width="128" height="120"/>
         <element name="ExerciseInstance" positionX="9" positionY="54" width="128" height="90"/>
         <element name="ExerciseSet" positionX="27" positionY="72" width="128" height="90"/>
         <element name="Muscle" positionX="18" positionY="63" width="128" height="90"/>

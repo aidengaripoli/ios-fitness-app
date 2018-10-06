@@ -35,13 +35,15 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBAction func save(_ sender: UIBarButtonItem) {
         // save the new workout
-        if !(workoutNameField.text?.isEmpty)! {
-            newWorkout.name = workoutNameField.text!
-            
-            model.workoutStore.save()
-            
-            presentingViewController?.dismiss(animated: true, completion: nil)
+        guard !workoutNameField.text!.isEmpty else {
+            return
         }
+        
+        newWorkout.name = workoutNameField.text!
+        
+        model.workoutStore.save()
+        
+        presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
@@ -110,6 +112,7 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
         let exercise = exerciseInstancesArray[indexPath.row].exercise
         
         cell.textLabel?.text = exercise?.name
+        cell.imageView?.image = UIImage(named: exercise!.mechanics!)
         
         return cell
     }

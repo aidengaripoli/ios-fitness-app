@@ -187,19 +187,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="OoS-7E-svy" firstAttribute="bottom" secondItem="57S-Pa-X83" secondAttribute="bottom" id="ITz-w3-lrh"/>
+                            <constraint firstItem="57S-Pa-X83" firstAttribute="top" secondItem="OoS-7E-svy" secondAttribute="top" id="WDx-In-mGd"/>
                             <constraint firstItem="OoS-7E-svy" firstAttribute="trailing" secondItem="57S-Pa-X83" secondAttribute="trailing" id="bg8-bc-mdL"/>
                             <constraint firstItem="57S-Pa-X83" firstAttribute="leading" secondItem="OoS-7E-svy" secondAttribute="leading" id="dzo-ta-Szk"/>
-                            <constraint firstItem="57S-Pa-X83" firstAttribute="top" secondItem="OoS-7E-svy" secondAttribute="top" id="zhO-pV-D2n"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OoS-7E-svy"/>
                     </view>
+                    <navigationItem key="navigationItem" id="4Nn-5E-EDR"/>
                     <connections>
                         <outlet property="tableView" destination="57S-Pa-X83" id="xTi-wn-SP3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PHd-Mb-elK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5059" y="437"/>
+            <point key="canvasLocation" x="5057.971014492754" y="436.95652173913049"/>
         </scene>
         <!--Workouts-->
         <scene sceneID="6Ak-0v-Efw">
@@ -278,17 +279,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="FYK-0Y-6bf" style="IBUITableViewCellStyleDefault" id="age-ee-wRI">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" textLabel="FYK-0Y-6bf" detailTextLabel="0IX-bE-L6J" imageView="jKl-kc-xlb" style="IBUITableViewCellStyleSubtitle" id="age-ee-wRI">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="age-ee-wRI" id="JGg-j5-bQV">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="376" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Exercise Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FYK-0Y-6bf">
-                                            <rect key="frame" x="20" y="0.0" width="374" height="43.666666666666664"/>
+                                            <rect key="frame" x="55.999999999999993" y="5" width="113.33333333333333" height="20.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="compound" id="jKl-kc-xlb">
+                                            <rect key="frame" x="20" y="11" width="21" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0IX-bE-L6J">
+                                            <rect key="frame" x="56" y="25.333333333333332" width="32.666666666666664" height="14.333333333333334"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -821,6 +833,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="compound" width="21" height="21"/>
         <image name="dumbbell" width="21" height="21"/>
         <image name="home" width="21" height="21"/>
         <image name="profile" width="512" height="512"/>

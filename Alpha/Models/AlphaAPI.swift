@@ -18,21 +18,42 @@ enum Endpoint: String {
     case muscles = "muscles"
 }
 
+enum Mechanics: String {
+    case all
+    case isolation
+    case compound
+}
+
 struct AlphaAPI {
 
-    private static let baseURLString = "http://167.99.79.170/"
+    private static let baseURLString = "http://167.99.79.170/exercises"
 
-    static var exercisesURL: URL {
-        return alphaURL(endpoint: .exercises)
+    static var baseExerciseURL: URL {
+        return alphaURL(mechanics: .all)
+    }
+    
+    static var isolationURL: URL {
+        return alphaURL(mechanics: .isolation)
+    }
+    
+    static var compoundURL: URL {
+        return alphaURL(mechanics: .compound)
     }
 
-    static var musclesURL: URL {
-        return alphaURL(endpoint: .muscles)
-    }
+    private static func alphaURL(mechanics: Mechanics) -> URL {
+        var components = URLComponents(string: baseURLString)!
 
-    private static func alphaURL(endpoint: Endpoint) -> URL {
-        let components = URLComponents(string: baseURLString + endpoint.rawValue)!
-
+        if mechanics == .none {
+            return components.url!
+        }
+        
+        var queryItems = [URLQueryItem]()
+        queryItems.append(
+            URLQueryItem(name: "mechanics", value: mechanics.rawValue)
+        )
+        
+        components.queryItems = queryItems
+        
         return components.url!
     }
 
@@ -68,15 +89,14 @@ struct AlphaAPI {
         guard
             let exerciseID = json["_id"] as? String,
             let name = json["name"] as? String,
+            let mechanics = json["mechanics"] as? String,
             let muscleArray = json["muscles"] as? [[String: String]] else {
                 return nil
         }
 
         // attempt to find exercise in core data with the same id
         let fetchRequest: NSFetchRequest<Exercise> = Exercise.fetchRequest()
-        
         let predicate = NSPredicate(format: "\(#keyPath(Exercise.exerciseID)) == %@", exerciseID)
-//        let predicate = NSPredicate(format: "\(#keyPath(Exercise.exerciseID)) == \(exerciseID)")
         
         fetchRequest.predicate = predicate
         
@@ -98,6 +118,7 @@ struct AlphaAPI {
             exercise = Exercise(context: context)
             exercise.exerciseID = exerciseID
             exercise.name = name
+            exercise.mechanics = mechanics
         }
         
         // do the same for all muscles associated with the current exercise

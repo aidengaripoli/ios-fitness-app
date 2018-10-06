@@ -53,8 +53,46 @@ class ExerciseStore {
         }
     }
     
-    func requestExercises(completion: @escaping (ExercisesResult) -> Void) {
-        let url = AlphaAPI.exercisesURL
+    func fetchExercises(mechanics: Mechanics, completion: @escaping (ExercisesResult) -> Void) {
+        let fetchRequest: NSFetchRequest<Exercise> = Exercise.fetchRequest()
+        let sortByName = NSSortDescriptor(key: #keyPath(Exercise.name), ascending: true)
+        
+        if mechanics != .all {
+            let predicate = NSPredicate(format: "\(#keyPath(Exercise.mechanics)) == %@", mechanics.rawValue)
+            fetchRequest.predicate = predicate
+        }
+        
+        fetchRequest.sortDescriptors = [sortByName]
+        
+        let context = persistantContainer.viewContext
+        
+        context.perform {
+            do {
+                let allExercises = try context.fetch(fetchRequest)
+                completion(.success(allExercises))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func requestAllExercises(completion: @escaping (ExercisesResult) -> Void) {
+        let url = AlphaAPI.baseExerciseURL
+        let request = URLRequest(url: url)
+        
+        let task = session.dataTask(with: request) { (data, response, error) in
+            self.processExercisesRequest(data: data, error: error, completion: { (result) in
+                OperationQueue.main.addOperation {
+                    completion(result)
+                }
+            })
+        }
+        
+        task.resume()
+    }
+    
+    func requestIsolationExercises(completion: @escaping (ExercisesResult) -> Void) {
+        let url = AlphaAPI.isolationURL
         let request = URLRequest(url: url)
 
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -65,6 +103,21 @@ class ExerciseStore {
             })
         }
 
+        task.resume()
+    }
+    
+    func requestCompoundExercises(completion: @escaping (ExercisesResult) -> Void) {
+        let url = AlphaAPI.compoundURL
+        let request = URLRequest(url: url)
+        
+        let task = session.dataTask(with: request) { (data, response, error) in
+            self.processExercisesRequest(data: data, error: error, completion: { (result) in
+                OperationQueue.main.addOperation {
+                    completion(result)
+                }
+            })
+        }
+        
         task.resume()
     }
 

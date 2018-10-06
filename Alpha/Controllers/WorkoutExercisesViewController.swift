@@ -72,6 +72,8 @@ class WorkoutExercisesViewController: UITableViewController {
         let exercise = exerciseInstanceArray[indexPath.row].exercise
         
         cell.textLabel?.text = exercise?.name
+        cell.imageView?.image = UIImage(named: exercise!.mechanics!)
+        cell.detailTextLabel?.text = exercise?.mechanics!.capitalized
         
         return cell
     }
