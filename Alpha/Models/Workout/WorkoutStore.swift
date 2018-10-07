@@ -131,4 +131,45 @@ class WorkoutStore {
         }
     }
     
+    func seed() {
+        // delete all workouts
+        let fetchRequest: NSFetchRequest<Workout> = Workout.fetchRequest()
+        let objs = try! persistantContainer.viewContext.fetch(fetchRequest)
+        
+        for case let obj as NSManagedObject in objs {
+            persistantContainer.viewContext.delete(obj)
+        }
+        
+        // create dummy workouts
+        let exercise = Exercise(context: persistantContainer.viewContext)
+        exercise.exerciseID = "123"
+        exercise.name = "Test Exercise"
+        exercise.mechanics = Mechanics.compound.rawValue
+        
+        let muscle = Muscle(context: persistantContainer.viewContext)
+        muscle.muscleID = "345"
+        muscle.name = "Chest"
+        
+        muscle.exercise = exercise
+        
+        for i in 0..<3 {
+            let workout = Workout(context: persistantContainer.viewContext)
+            let exerciseInstance = ExerciseInstance(context: persistantContainer.viewContext)
+            let set = ExerciseSet(context: persistantContainer.viewContext)
+            
+            set.weight = Int32(i)
+            set.reps = Int32(i)
+            
+            workout.name = "Workout \(i)"
+            workout.dateCreated = Date() as NSDate
+            
+            exerciseInstance.addToSets(set)
+            exerciseInstance.exercise = exercise
+            
+            workout.addToExerciseInstances(exerciseInstance)
+        }
+        
+        try! persistantContainer.viewContext.save()
+    }
+    
 }

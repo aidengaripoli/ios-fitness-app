@@ -30,6 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let workoutStore = WorkoutStore(container: persistantContainer)
         let exerciseStore = ExerciseStore(container: persistantContainer)
         
+        if ProcessInfo.processInfo.arguments.contains("IS_RUNNING_UITEST") {
+            exerciseStore._deleteAllExercises()
+            workoutStore.seed()
+        }
+        
         let model = Model(workoutStore: workoutStore, exerciseStore: exerciseStore)
         
         let tabController = window!.rootViewController as! UITabBarController

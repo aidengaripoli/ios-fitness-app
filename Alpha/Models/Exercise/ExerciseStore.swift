@@ -148,4 +148,21 @@ class ExerciseStore {
         }
     }
     
+    func _deleteAllExercises() {
+        // delete all exercises and muscles
+        let exerciseFetchRequest: NSFetchRequest<Exercise> = Exercise.fetchRequest()
+        let exercises = try! persistantContainer.viewContext.fetch(exerciseFetchRequest)
+        
+        for case let exercise as NSManagedObject in exercises {
+            persistantContainer.viewContext.delete(exercise)
+        }
+        
+        let muscleFetchRequest: NSFetchRequest<Muscle> = Muscle.fetchRequest()
+        let muscles = try! persistantContainer.viewContext.fetch(muscleFetchRequest)
+        
+        for case let muscle as NSManagedObject in muscles {
+            persistantContainer.viewContext.delete(muscle)
+        }
+    }
+    
 }

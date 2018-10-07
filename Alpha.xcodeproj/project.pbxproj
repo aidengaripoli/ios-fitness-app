@@ -20,6 +20,7 @@
 		8F2AE6F3212835FC0066C8E4 /* AddWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2AE6F2212835FC0066C8E4 /* AddWorkoutViewController.swift */; };
 		8F5609692129770600905908 /* ExerciseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5609682129770600905908 /* ExerciseStore.swift */; };
 		8F56096B212A946000905908 /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F56096A212A946000905908 /* ExerciseCell.swift */; };
+		8F5C1C68216A08CC006FCD9E /* Alpha.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F700DAD2164782600659310 /* Alpha.xcdatamodeld */; };
 		8F700DAF2164782600659310 /* Alpha.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F700DAD2164782600659310 /* Alpha.xcdatamodeld */; };
 		8F700DBE21647B0300659310 /* Exercise+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F700DB821647B0300659310 /* Exercise+CoreDataClass.swift */; };
 		8F700DC021647B0300659310 /* ExerciseInstance+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F700DBA21647B0300659310 /* ExerciseInstance+CoreDataClass.swift */; };
@@ -451,6 +452,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F5C1C68216A08CC006FCD9E /* Alpha.xcdatamodeld in Sources */,
 				8FE8EA3D21219B3500BA6258 /* AlphaUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

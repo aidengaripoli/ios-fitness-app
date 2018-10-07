@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import CoreData
 @testable import Alpha
 
 class AlphaUITests: XCTestCase {
@@ -19,6 +20,8 @@ class AlphaUITests: XCTestCase {
         continueAfterFailure = false
         
         app = XCUIApplication()
+        
+        app.launchArguments.append("IS_RUNNING_UITEST")
         
         app.launch()
     }
@@ -115,7 +118,7 @@ class AlphaUITests: XCTestCase {
         
         // post condition: all workouts showing on workouts screen
         
-        XCTAssertEqual(app.tables.cells.count, 6)
+        XCTAssertEqual(app.tables.cells.count, 3)
     }
     
     func testNewWorkout() {
@@ -135,7 +138,7 @@ class AlphaUITests: XCTestCase {
     
     func testDeleteWorkout() {
         
-        // pre condition: 6 workouts in store
+        // pre condition: 3 workouts in store
         
         app.tabBars.buttons["Workouts"].tap()
         
@@ -147,12 +150,12 @@ class AlphaUITests: XCTestCase {
         let tablesQuery = app.tables
         tablesQuery.cells.element(boundBy: 0).buttons.element(boundBy: 0).tap()
         tablesQuery.buttons["Delete"].tap()
-        app.sheets["Delete Push?"].buttons["Delete"].tap()
+        app.sheets["Delete Workout 0?"].buttons["Delete"].tap()
         workoutsNavigationBar.buttons["Done"].tap()
         
         // post condition: 1 less workouts
         
-        XCTAssertEqual(tablesQuery.cells.count, 5)
+        XCTAssertEqual(tablesQuery.cells.count, 2)
     }
     
     func testTapWorkoutCell() {
@@ -163,11 +166,11 @@ class AlphaUITests: XCTestCase {
         
         // action: tap workout cell
         
-        app.tables.children(matching: .cell).element(boundBy: 0).staticTexts["Push"].tap()
+        app.tables.children(matching: .cell).element(boundBy: 0).staticTexts["Workout 0"].tap()
         
         // post condition: on workout screen
         
-        XCTAssert(app.navigationBars["Push"].exists)
+        XCTAssert(app.navigationBars["Workout 0"].exists)
     }
     
     // MARK: - Workout Exercises Screen
@@ -177,29 +180,29 @@ class AlphaUITests: XCTestCase {
         
         // pre condition: on workouts screen
         
-        // action: tap push workout cell
+        // action: tap workout 0 workout cell
         
-        app.tables.children(matching: .cell).element(boundBy: 0).staticTexts["Push"].tap()
+        app.tables.children(matching: .cell).element(boundBy: 0).staticTexts["Workout 0"].tap()
         
         // post condition: all exercises present
         
-        XCTAssertEqual(app.tables.cells.count, 3)
+        XCTAssertEqual(app.tables.cells.count, 1)
     }
     
     func testSelectExercises() {
         app.tabBars.buttons["Workouts"].tap()
-        
+
         // pre condition: on workouts screen
-        
-        // action: tap push workout cell, tap edit
-        
-        app.tables.children(matching: .cell).element(boundBy: 0).staticTexts["Push"].tap()
-        
-        app.navigationBars["Push"].buttons["Edit"].tap()
-        
-        // post condition: on select exercises screen for push
-        
-        XCTAssert(app.navigationBars["Select Exercises"].exists)
+
+        // action: tap workout 0 workout cell, tap edit
+
+        app.tables.children(matching: .cell).element(boundBy: 0).staticTexts["Workout 0"].tap()
+
+        app.navigationBars["Workout 0"].buttons["Edit"].tap()
+
+        // post condition: on select exercises screen for workout 0
+
+        XCTAssertGreaterThan(app.tables.cells.count, 0)
     }
     
     func testBackToWorkouts() {
@@ -207,11 +210,11 @@ class AlphaUITests: XCTestCase {
         
         // pre condition: on workouts screen
         
-        // action: tap on push workout cell, tap on workouts back button
+        // action: tap on workout 0 workout cell, tap on workouts back button
         
-        app.tables.children(matching: .cell).element(boundBy: 0).staticTexts["Push"].tap()
+        app.tables.children(matching: .cell).element(boundBy: 0).staticTexts["Workout 0"].tap()
         
-        app.navigationBars["Push"].buttons["Workouts"].tap()
+        app.navigationBars["Workout 0"].buttons["Workouts"].tap()
         
         // post condition: back on workout screen
         
@@ -223,15 +226,15 @@ class AlphaUITests: XCTestCase {
         
         // pre condition: on workouts screen
         
-        // action: tap push workout cell, tap bench press exercise cell
+        // action: tap workout 0 workout cell, tap bench press exercise cell
         
-        app.tables.children(matching: .cell).element(boundBy: 0).staticTexts["Push"].tap()
+        app.tables.children(matching: .cell).element(boundBy: 0).staticTexts["Workout 0"].tap()
         
-        app.tables.staticTexts["Bench Press"].tap()
+        app.tables.staticTexts["Test Exercise"].tap()
         
-        // post condition: on bench press exercise detail screen
+        // post condition: on test exercise detail screen
         
-        XCTAssert(app.navigationBars["Bench Press"].exists)
+        XCTAssert(app.navigationBars["Test Exercise"].exists)
     }
     
     // MARK: - Add Workout Screen
@@ -247,8 +250,7 @@ class AlphaUITests: XCTestCase {
         app.buttons["selectExercises"].tap()
         
         // post condition:
-        
-        XCTAssert(app.navigationBars["Select Exercises"].exists)
+        XCTAssertGreaterThan(app.tables.cells.count, 0)
     }
     
     // MARK: - Select Exercises Screen
@@ -265,7 +267,7 @@ class AlphaUITests: XCTestCase {
         
         // post condition: all exercises are present
         
-        XCTAssertEqual(app.tables.cells.count, 7)
+        XCTAssertEqual(app.tables.cells.count, 1)
     }
     
     // MARK: - Use Case
@@ -283,15 +285,20 @@ class AlphaUITests: XCTestCase {
         app.tables.containing(.other, identifier:"Exercises").element.tap()
         app.buttons["selectExercises"].tap()
         
-        app.tables.staticTexts["Bench Press"].tap()
-        app.tables.staticTexts["Push Up"].tap()
+        addUIInterruptionMonitor(withDescription: "Loading") { alert in
+            self.expectation(for: NSPredicate(format: "exists == false"), evaluatedWith: alert, handler: nil);
+            self.waitForExpectations(timeout: 10, handler: nil)
+            return true
+        }
         
-        app.navigationBars["Select Exercises"].buttons["New Workout"].tap()
+        app.tables.staticTexts["Test Exercise"].tap()
+        
+        app.navigationBars.buttons.element(boundBy: 0).tap()
         app.navigationBars["New Workout"].buttons["Save"].tap()
         app.tabBars.buttons["Workouts"].tap()
         
-        app.cells.element(boundBy: 6).tap()
-        app.cells.staticTexts["Push Up"].tap()
+        app.cells.element(boundBy: 0).tap()
+        app.cells.staticTexts["Test Exercise"].tap()
         
         let weightField = app.tables.cells.children(matching: .textField).element(boundBy: 1)
         
@@ -303,10 +310,10 @@ class AlphaUITests: XCTestCase {
         repsField.tap()
         app.pickers["repsPickerView"].pickerWheels["1 reps"].swipeUp()
         
-        app.navigationBars["Push Up"].buttons["test"].tap()
-        app.navigationBars["test"].buttons["Workouts"].tap()
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        app.navigationBars.buttons.element(boundBy: 0).tap()
         
-        XCTAssertEqual(app.tables.cells.count, 7)
+        XCTAssertEqual(app.tables.cells.count, 4)
     }
     
 }

@@ -172,7 +172,7 @@
                                                 <constraint firstItem="3zV-lF-g7d" firstAttribute="top" secondItem="QCr-Of-3vy" secondAttribute="topMargin" id="xwv-Ex-fWf"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <accessibility key="accessibilityConfiguration" identifier="exercises">
+                                        <accessibility key="accessibilityConfiguration" identifier="exercises" label="exercises">
                                             <accessibilityTraits key="traits" button="YES" link="YES" selected="YES" staticText="YES" allowsDirectInteraction="YES"/>
                                             <bool key="isElement" value="YES"/>
                                         </accessibility>
