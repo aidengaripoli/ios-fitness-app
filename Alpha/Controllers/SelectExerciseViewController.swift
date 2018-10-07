@@ -27,11 +27,11 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
     
     var model: Model!
     
-    var filteredExercises = [Exercise]()
-    var selectedIndexPaths = [IndexPath]()
+    private var filteredExercises = [Exercise]()
+    private var selectedIndexPaths = [IndexPath]()
     
-    let searchController = UISearchController(searchResultsController: nil)
-    let segment: UISegmentedControl = UISegmentedControl(items: ["All", "Isolation", "Compound"])
+    private let searchController = UISearchController(searchResultsController: nil)
+    private let segment: UISegmentedControl = UISegmentedControl(items: ["All", "Isolation", "Compound"])
     
     // MARK: - Lifecycle Methods
     
@@ -60,12 +60,9 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         
         // fetch from all exercises core data, then load the array into the data source
         // for the table view. then do a network fetch request to get all exercises from
-        // the api, save the new exercises in core data if they dont exist, re fetch all
-        // exercises and reload the tableview.
-        
-        updateDataSource() // fetches from COREDATA and loads into datasource array
-
-        // networking fetch
+        // the api, save the new exercises in core data if they dont already exist, then
+        // fetch all exercises from core data and reload the tableview.
+        updateDataSource()
         showFetchingIndicatorAlert()
         
         model.exerciseStore.requestAllExercises { (exercisesResult) in
@@ -173,7 +170,7 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
-    func updateSelectedExercises() {
+    private func updateSelectedExercises() {
         selectedIndexPaths.removeAll()
         
         var exercises: [Exercise]
@@ -194,11 +191,11 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
     }
     
-    func searchBarIsEmpty() -> Bool {
+    private func searchBarIsEmpty() -> Bool {
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
-    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+    private func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         filteredExercises = exercises.filter({ (exercise) -> Bool in
             var doesMuscleMatch = scope == "All"
             
@@ -221,13 +218,13 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         tableView.reloadData()
     }
     
-    func isFiltering() -> Bool {
+    private func isFiltering() -> Bool {
         let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
         
         return searchController.isActive && (!searchBarIsEmpty() || searchBarScopeIsFiltering)
     }
     
-    @objc func requestExercises(sender: UISegmentedControl) {
+    @objc private func requestExercises(sender: UISegmentedControl) {
         showFetchingIndicatorAlert()
         
         switch sender.selectedSegmentIndex {
@@ -251,7 +248,7 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
-    func showFetchingIndicatorAlert() {
+    private func showFetchingIndicatorAlert() {
         let alert = UIAlertController(title: nil, message: "Loading...", preferredStyle: .alert)
         
         let fetchingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))

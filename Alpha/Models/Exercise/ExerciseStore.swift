@@ -18,14 +18,12 @@ class ExerciseStore {
     
     // MARK: - Properties
     
-//    var exercises = [Exercise]()
-    
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
         return URLSession(configuration: config)
     }()
     
-    let persistantContainer: NSPersistentContainer!
+    private let persistantContainer: NSPersistentContainer!
     
     // MARK: - Init
     

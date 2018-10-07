@@ -20,7 +20,7 @@ class WorkoutStore {
     
     var workouts = [Workout]()
     
-    var persistantContainer: NSPersistentContainer!
+    private var persistantContainer: NSPersistentContainer!
     
     // MARK: - Init
     
@@ -77,7 +77,6 @@ class WorkoutStore {
     func createNewWorkout() -> Workout {
         let workout = NSEntityDescription.insertNewObject(forEntityName: "Workout", into: persistantContainer.viewContext) as! Workout
         
-//        workout.name = ""
         workout.dateCreated = Date() as NSDate
         
         return workout

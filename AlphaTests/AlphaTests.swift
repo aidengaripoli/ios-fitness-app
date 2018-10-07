@@ -23,7 +23,7 @@ class AlphaTests: XCTestCase {
         return managedObjectModel!
     }()
     
-    // in memeory core data persistent container
+    // In memeory core data persistent container
     lazy var mockPersistantContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "AlphaTest", managedObjectModel: self.managedObjectModel)
         let description = NSPersistentStoreDescription()

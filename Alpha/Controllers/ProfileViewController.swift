@@ -12,19 +12,19 @@ class ProfileViewController: UIViewController {
     
     // MARK: - Properties
     
-    var agePickerView: UIPickerView!
-    var heightPickerView: UIPickerView!
-    var weightPickerView: UIPickerView!
+    private var agePickerView: UIPickerView!
+    private var heightPickerView: UIPickerView!
+    private var weightPickerView: UIPickerView!
     
-    var pickerViewToolBar: UIToolbar!
+    private var pickerViewToolBar: UIToolbar!
     
-    var activeTextField: UITextField?
+    private var activeTextField: UITextField?
     
-    var ageData = Array(13...99)
-    var heightData = Array(50...200)
-    var weightData = Array(30...300)
+    private let ageData = Array(13...99)
+    private let heightData = Array(50...200)
+    private let weightData = Array(30...300)
     
-    var profileDetails = ProfileDetails()
+    private let profileDetails = ProfileDetails()
     var imageStore: ImageStore!
     
     // MARK: - Outlets
@@ -118,7 +118,7 @@ class ProfileViewController: UIViewController {
     
     // MARK: - Instance Methods
     
-    @objc func donePicker(sender: UIBarButtonItem) {
+    @objc private func donePicker(sender: UIBarButtonItem) {
         activeTextField?.resignFirstResponder()
         activeTextField = nil
     }
@@ -168,13 +168,10 @@ extension ProfileViewController: UIPickerViewDelegate {
         switch pickerView.tag {
         case 1:
             return "\(ageData[row])"
-//            return profileDetails.get(key: "age") as? String
         case 2:
             return "\(heightData[row]) cms"
-//            return profileDetails.get(key: "height") as? String
         case 3:
             return "\(weightData[row]) kgs"
-//            return profileDetails.get(key: "weight") as? String
         default:
             return ""
         }

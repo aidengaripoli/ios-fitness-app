@@ -10,24 +10,24 @@ import Foundation
 
 class WorkoutViewModel {
     
-    // MARK
+    // MARK: - Properties
     
     let workout: Workout
     
-    let dateFormatter: DateFormatter = {
+    private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
         return formatter
     }()
     
-    // MARK
+    // MARK: - Init
     
     init(withWorkout workout: Workout) {
         self.workout = workout
     }
     
-    // MARK
+    // MARK: - Methods
     
     func formattedDate() -> String {
         return dateFormatter.string(from: workout.dateCreated! as Date)

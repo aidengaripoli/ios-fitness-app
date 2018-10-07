@@ -10,9 +10,9 @@ import Foundation
 
 class ProfileDetails {
     
-    let fileManager = FileManager.default
+    private let fileManager = FileManager.default
     
-    let destination: String!
+    private let destination: String!
     
     init() {
         let source = Bundle.main.path(forResource: "ProfileDetails", ofType: "plist")

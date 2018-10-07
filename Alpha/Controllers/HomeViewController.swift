@@ -22,9 +22,7 @@ class HomeViewController: UIViewController, WorkoutViewModelProtocol {
     // MARK: - Outlets
     
     @IBOutlet var tableView: UITableView!
-    
-    // MARK: - Actions
-    
+
     // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {

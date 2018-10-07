@@ -21,15 +21,15 @@ class ExerciseDetailViewController: UIViewController {
     
     var model: Model!
     
-    var weightPickerView: UIPickerView!
-    var repsPickerView: UIPickerView!
+    private var weightPickerView: UIPickerView!
+    private var repsPickerView: UIPickerView!
     
-    var pickerViewToolBar: UIToolbar!
+    private var pickerViewToolBar: UIToolbar!
     
-    var activeTextField: UITextField?
+    private var activeTextField: UITextField?
     
-    var weightData = Array(0...250)
-    var repsData = Array(1...20)
+    private let weightData = Array(0...250)
+    private let repsData = Array(1...20)
     
     // MARK: - Outlets
 
@@ -55,10 +55,8 @@ class ExerciseDetailViewController: UIViewController {
         super.viewDidLoad()
         
         collectionView.dataSource = self
-        collectionView.delegate = self
         
         tableView.dataSource = self
-        tableView.delegate = self
         
         // weight pickerview init
         weightPickerView = UIPickerView()
@@ -98,7 +96,7 @@ class ExerciseDetailViewController: UIViewController {
     
     // MARK: - Instance Methods
 
-    @objc func donePicker(sender: UIBarButtonItem) {
+    @objc private func donePicker(sender: UIBarButtonItem) {
         activeTextField?.resignFirstResponder()
         activeTextField = nil
     }
@@ -127,8 +125,7 @@ extension ExerciseDetailViewController: UITableViewDataSource {
         cell.repsField.inputAccessoryView = pickerViewToolBar
         
         let setsArray = exerciseInstance.sets?.allObjects as! [ExerciseSet]
-        
-        
+
         cell.setLabel.text = "\(indexPath.row + 1)"
         cell.weightField.text = "\(setsArray[indexPath.row].weight) kgs"
         cell.repsField.text = "\(setsArray[indexPath.row].reps) reps"
@@ -137,10 +134,6 @@ extension ExerciseDetailViewController: UITableViewDataSource {
     }
     
 }
-
-// MARK: - Extension TableViewDelegate
-
-extension ExerciseDetailViewController: UITableViewDelegate {}
 
 // MARK: - Extension CollectionViewDataSource
 
@@ -163,10 +156,6 @@ extension ExerciseDetailViewController: UICollectionViewDataSource {
     }
     
 }
-
-// MARK: - Extension CollectionViewDelegate
-
-extension ExerciseDetailViewController: UICollectionViewDelegate {}
 
 // MARK: - Extension PickerViewDataSoure
 

@@ -27,7 +27,7 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: - Actions
     
     @IBAction func save(_ sender: UIBarButtonItem) {
-        // save the new workout
+        // save the new workout if the name field is not empty
         guard !workoutNameField.text!.isEmpty else {
             return
         }
