@@ -29,6 +29,7 @@
 		8F700DCA21647B6000659310 /* Muscle+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F700DC821647B6000659310 /* Muscle+CoreDataClass.swift */; };
 		8FA5E35E212EB3470079431F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5E35D212EB3470079431F /* Model.swift */; };
 		8FBF5D7821685FB0000E25CD /* Exercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBF5D7721685FB0000E25CD /* Exercise+CoreDataProperties.swift */; };
+		8FBF5D7A21699CBA000E25CD /* WorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBF5D7921699CBA000E25CD /* WorkoutViewModel.swift */; };
 		8FC673FE212D2E6A00834893 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC673FD212D2E6A00834893 /* HomeViewController.swift */; };
 		8FC67424212D559700834893 /* WorkoutCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC67423212D559700834893 /* WorkoutCardTableViewCell.swift */; };
 		8FC67426212D55B900834893 /* WorkoutCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC67425212D55B900834893 /* WorkoutCardCollectionViewCell.swift */; };
@@ -87,6 +88,7 @@
 		8F700DC821647B6000659310 /* Muscle+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Muscle+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8FA5E35D212EB3470079431F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		8FBF5D7721685FB0000E25CD /* Exercise+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8FBF5D7921699CBA000E25CD /* WorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewModel.swift; sourceTree = "<group>"; };
 		8FC673FD212D2E6A00834893 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8FC67423212D559700834893 /* WorkoutCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutCardTableViewCell.swift; sourceTree = "<group>"; };
 		8FC67425212D55B900834893 /* WorkoutCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutCardCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				8F265B7E2167065F003C9F6E /* Workout+CoreDataProperties.swift */,
 				8F700DC421647B4900659310 /* Workout+CoreDataClass.swift */,
 				8FE8EA532124126500BA6258 /* WorkoutStore.swift */,
+				8FBF5D7921699CBA000E25CD /* WorkoutViewModel.swift */,
 			);
 			path = Workout;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				8F2AE6F721283B8D0066C8E4 /* Muscle.swift in Sources */,
 				8F700DBE21647B0300659310 /* Exercise+CoreDataClass.swift in Sources */,
 				8F700DC621647B4900659310 /* Workout+CoreDataClass.swift in Sources */,
+				8FBF5D7A21699CBA000E25CD /* WorkoutViewModel.swift in Sources */,
 				8FCFF06021676B8B00644174 /* ImageStore.swift in Sources */,
 				8FD1F55821251064000E6852 /* WorkoutExercisesViewController.swift in Sources */,
 				8FE8EA4B2121A12000BA6258 /* WorkoutsViewController.swift in Sources */,

@@ -14,13 +14,6 @@ class WorkoutsViewController: UITableViewController {
     
     var model: Model!
     
-    let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        return formatter
-    }()
-    
     // MARK: - Actions
     
     // MARK: - Init
@@ -75,8 +68,10 @@ class WorkoutsViewController: UITableViewController {
         
         let workout = model.workoutStore.workouts[indexPath.row]
         
+        let workoutViewModel = WorkoutViewModel(withWorkout: workout)
+        
         cell.nameLabel.text = workout.name
-        cell.dateLabel.text = dateFormatter.string(from: workout.dateCreated! as Date)
+        cell.dateLabel.text = workoutViewModel.formattedDate()
         
         return cell
     }

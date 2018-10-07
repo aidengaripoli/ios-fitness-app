@@ -17,13 +17,6 @@ class HomeViewController: UIViewController {
     var previousWorkouts: [Workout] = []
     var currentWorkouts = [Workout]()
     
-    let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        return formatter
-    }()
-    
     // MARK: - Outlets
     
     @IBOutlet var tableView: UITableView!
@@ -155,8 +148,10 @@ extension HomeViewController: UICollectionViewDelegate {
         
         workout = collectionView.tag == 0 ? previousWorkouts[indexPath.item] : currentWorkouts[indexPath.item]
         
+        let workoutViewModel = WorkoutViewModel(withWorkout: workout)
+        
         cell.nameLabel.text = workout.name
-        cell.dateLabel.text = dateFormatter.string(from: workout.dateCreated! as Date)
+        cell.dateLabel.text = workoutViewModel.formattedDate()
         cell.exerciseSummary.text = "\(workout.exerciseInstances!.count) exercises"
         
         var totalReps: Int32 = 0
