@@ -252,7 +252,7 @@ class SelectExerciseViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func showFetchingIndicatorAlert() {
-        let alert = UIAlertController(title: nil, message: "Fetching...", preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "Loading...", preferredStyle: .alert)
         
         let fetchingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         fetchingIndicator.hidesWhenStopped = true

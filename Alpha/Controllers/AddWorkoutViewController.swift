@@ -8,11 +8,11 @@
 
 import UIKit
 
-class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, WorkoutViewModelProtocol {
     
     // MARK: - Properties
     
-    var newWorkoutViewModel: WorkoutViewModel!
+    var workoutViewModel: WorkoutViewModel!
     
     var model: Model!
     
@@ -32,7 +32,7 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
             return
         }
         
-        newWorkoutViewModel.workout.name = workoutNameField.text!
+        workoutViewModel.workout.name = workoutNameField.text!
         
         model.workoutStore.save()
         
@@ -40,7 +40,7 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        model.workoutStore.removeWorkout(newWorkoutViewModel.workout)
+        model.workoutStore.removeWorkout(workoutViewModel.workout)
         
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
@@ -55,7 +55,7 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         
         let newWorkout = model.workoutStore.createNewWorkout()
-        newWorkoutViewModel = WorkoutViewModel(withWorkout: newWorkout)
+        workoutViewModel = WorkoutViewModel(withWorkout: newWorkout)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -64,7 +64,7 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        dateLabel.text = newWorkoutViewModel.formattedDate()
+        dateLabel.text = workoutViewModel.formattedDate()
         
         tableView.reloadData()
     }
@@ -81,7 +81,7 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
         switch segue.identifier {
         case "selectExercises":
             let selectExerciseViewController = segue.destination as! SelectExerciseViewController
-            selectExerciseViewController.workout = newWorkoutViewModel.workout
+            selectExerciseViewController.workout = workoutViewModel.workout
             selectExerciseViewController.model = model
         default:
             preconditionFailure("Unexpected segue identifier.")
@@ -95,13 +95,13 @@ class AddWorkoutViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newWorkoutViewModel.exerciseInstanceCount()
+        return workoutViewModel.exerciseInstanceCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath)
         
-        let exerciseInstancesArray = newWorkoutViewModel.exerciseInstancesArray()
+        let exerciseInstancesArray = workoutViewModel.exerciseInstancesArray()
         
         let exercise = exerciseInstancesArray[indexPath.row].exercise
         

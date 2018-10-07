@@ -8,11 +8,13 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
-    
+class HomeViewController: UIViewController, WorkoutViewModelProtocol {
+
     // MARK: - Properties
     
     var model: Model!
+
+    var workoutViewModel: WorkoutViewModel!
     
     var previousWorkouts: [Workout] = []
     var currentWorkouts = [Workout]()
@@ -148,7 +150,7 @@ extension HomeViewController: UICollectionViewDelegate {
         
         workout = collectionView.tag == 0 ? previousWorkouts[indexPath.item] : currentWorkouts[indexPath.item]
         
-        let workoutViewModel = WorkoutViewModel(withWorkout: workout)
+        workoutViewModel = WorkoutViewModel(withWorkout: workout)
         
         cell.nameLabel.text = workout.name
         cell.dateLabel.text = workoutViewModel.formattedDate()

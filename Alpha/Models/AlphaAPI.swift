@@ -12,12 +12,6 @@ import CoreData
 enum AlphaAPIError: Error {
     case invalidJSONData
 }
-
-enum Endpoint: String {
-    case exercises = "exercises"
-    case muscles = "muscles"
-}
-
 enum Mechanics: String {
     case all
     case isolation

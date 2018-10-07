@@ -8,13 +8,13 @@
 
 import UIKit
 
-class WorkoutsViewController: UITableViewController {
+class WorkoutsViewController: UITableViewController, WorkoutViewModelProtocol {
     
     // MARK: - Properties
     
     var model: Model!
     
-    // MARK: - Actions
+    var workoutViewModel: WorkoutViewModel!
     
     // MARK: - Init
     
@@ -68,7 +68,7 @@ class WorkoutsViewController: UITableViewController {
         
         let workout = model.workoutStore.workouts[indexPath.row]
         
-        let workoutViewModel = WorkoutViewModel(withWorkout: workout)
+        workoutViewModel = WorkoutViewModel(withWorkout: workout)
         
         cell.nameLabel.text = workout.name
         cell.dateLabel.text = workoutViewModel.formattedDate()
