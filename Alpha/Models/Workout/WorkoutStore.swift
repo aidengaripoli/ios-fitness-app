@@ -30,25 +30,6 @@ class WorkoutStore {
     
     // MARK: - Methods
     
-//    func fetchAllWorkouts(completion: @escaping (WorkoutsResult) -> Void) {
-//        let fetchRequest: NSFetchRequest<Workout> = Workout.fetchRequest()
-//        let sortByDateCreated = NSSortDescriptor(key: #keyPath(Workout.dateCreated), ascending: true)
-//
-//        fetchRequest.sortDescriptors = [sortByDateCreated]
-//
-//        let context = persistantContainer.viewContext
-//
-//        context.perform {
-//            do {
-//                let allWorkouts = try context.fetch(fetchRequest)
-//                self.workouts = allWorkouts
-//                completion(.success(allWorkouts))
-//            } catch {
-//                completion(.failure(error))
-//            }
-//        }
-//    }
-    
     func fetchAllWorkouts() {
         let fetchRequest: NSFetchRequest<Workout> = Workout.fetchRequest()
         let sortByDateCreated = NSSortDescriptor(key: #keyPath(Workout.dateCreated), ascending: true)
@@ -131,6 +112,8 @@ class WorkoutStore {
         
         // associate it with the instance
         initialSet.exerciseInstance = instance
+        
+        save()
     }
     
     func deleteExerciseInstance(exerciseInstance: ExerciseInstance) {

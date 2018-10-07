@@ -38,7 +38,6 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        // temp
         tableView.rowHeight = 200
     }
     
@@ -158,6 +157,17 @@ extension HomeViewController: UICollectionViewDelegate {
         
         cell.nameLabel.text = workout.name
         cell.dateLabel.text = dateFormatter.string(from: workout.dateCreated! as Date)
+        cell.exerciseSummary.text = "\(workout.exerciseInstances!.count) exercises"
+        
+        var totalReps: Int32 = 0
+        let instances = workout.exerciseInstances?.allObjects as! [ExerciseInstance]
+        for instance in instances {
+            for set in instance.sets?.allObjects as! [ExerciseSet] {
+                totalReps += set.reps
+            }
+        }
+        
+        cell.totalRepsLabel.text = "\(totalReps) reps completed!"
     }
     
 }

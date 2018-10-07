@@ -678,33 +678,45 @@
                                                     <rect key="frame" x="20" y="11" width="374" height="158"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3gA-Rk-XkV">
-                                                        <size key="itemSize" width="160" height="150"/>
+                                                        <size key="itemSize" width="200" height="150"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WorkoutCardCollectionViewCell" id="dMc-e5-2PP" customClass="WorkoutCardCollectionViewCell" customModule="Alpha" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="4" width="160" height="150"/>
+                                                            <rect key="frame" x="0.0" y="4" width="200" height="150"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                                <rect key="frame" x="0.0" y="0.0" width="160" height="150"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IaC-w2-lxE">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="160" height="150"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GzS-yp-1Gk">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="160" height="150"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PbL-Sf-XC3">
-                                                                                        <rect key="frame" x="57.666666666666657" y="0.0" width="45" height="75"/>
+                                                                                        <rect key="frame" x="77.666666666666671" y="0.0" width="45" height="37.666666666666664"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQG-yJ-4an">
-                                                                                        <rect key="frame" x="59.333333333333343" y="75" width="41.666666666666657" height="75"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQG-yJ-4an">
+                                                                                        <rect key="frame" x="82" y="37.666666666666657" width="36" height="37.333333333333343"/>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                        <nil key="textColor"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No. Exercises" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UaV-DB-7p5">
+                                                                                        <rect key="frame" x="48.333333333333336" y="75" width="103.33333333333331" height="37.666666666666657"/>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                        <nil key="textColor"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TotalReps" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJy-Ls-rfK">
+                                                                                        <rect key="frame" x="62.333333333333336" y="112.66666666666667" width="75.333333333333314" height="37.333333333333329"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -716,7 +728,7 @@
                                                                         <constraints>
                                                                             <constraint firstItem="GzS-yp-1Gk" firstAttribute="top" secondItem="IaC-w2-lxE" secondAttribute="top" id="IMO-Ew-H8o"/>
                                                                             <constraint firstAttribute="bottom" secondItem="GzS-yp-1Gk" secondAttribute="bottom" id="RTl-WI-fqI"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="GzS-yp-1Gk" secondAttribute="trailing" id="dwn-D6-eDq"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="GzS-yp-1Gk" secondAttribute="trailing" id="kVe-Is-9ob"/>
                                                                             <constraint firstItem="GzS-yp-1Gk" firstAttribute="leading" secondItem="IaC-w2-lxE" secondAttribute="leading" id="mh4-k4-UJA"/>
                                                                         </constraints>
                                                                     </view>
@@ -730,7 +742,9 @@
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="dateLabel" destination="HQG-yJ-4an" id="fbt-lD-OOp"/>
+                                                                <outlet property="exerciseSummary" destination="UaV-DB-7p5" id="3fq-33-RLB"/>
                                                                 <outlet property="nameLabel" destination="PbL-Sf-XC3" id="n2W-uR-cfB"/>
+                                                                <outlet property="totalRepsLabel" destination="XJy-Ls-rfK" id="zEs-tV-dE3"/>
                                                                 <outlet property="view" destination="IaC-w2-lxE" id="qRv-Ph-cHM"/>
                                                             </connections>
                                                         </collectionViewCell>
