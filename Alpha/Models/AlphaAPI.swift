@@ -37,7 +37,7 @@ struct AlphaAPI {
     private static func alphaURL(mechanics: Mechanics) -> URL {
         var components = URLComponents(string: baseURLString)!
 
-        if mechanics == .none {
+        if mechanics == .all {
             return components.url!
         }
         
