@@ -30,6 +30,7 @@
 		8FA5E35E212EB3470079431F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA5E35D212EB3470079431F /* Model.swift */; };
 		8FBF5D7821685FB0000E25CD /* Exercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBF5D7721685FB0000E25CD /* Exercise+CoreDataProperties.swift */; };
 		8FBF5D7A21699CBA000E25CD /* WorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBF5D7921699CBA000E25CD /* WorkoutViewModel.swift */; };
+		8FBF5D7B2169D54D000E25CD /* Alpha.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F700DAD2164782600659310 /* Alpha.xcdatamodeld */; };
 		8FC673FE212D2E6A00834893 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC673FD212D2E6A00834893 /* HomeViewController.swift */; };
 		8FC67424212D559700834893 /* WorkoutCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC67423212D559700834893 /* WorkoutCardTableViewCell.swift */; };
 		8FC67426212D55B900834893 /* WorkoutCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC67425212D55B900834893 /* WorkoutCardCollectionViewCell.swift */; };
@@ -441,6 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FBF5D7B2169D54D000E25CD /* Alpha.xcdatamodeld in Sources */,
 				8FE8EA3221219B3500BA6258 /* AlphaTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
